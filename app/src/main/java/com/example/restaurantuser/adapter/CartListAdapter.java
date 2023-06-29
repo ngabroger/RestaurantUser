@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import java.text.DecimalFormat;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -24,11 +25,13 @@ public class CartListAdapter extends RecyclerView.Adapter<CartListAdapter.ViewHo
     ArrayList<FoodDomain>listFoodSelected;
     private ManagementCart managementCart;
     ChangeNumberItemsListener changeNumberItemsListener;
+    private DecimalFormat decimalFormat;
 
     public CartListAdapter(ArrayList<FoodDomain> listFoodSelected, Context context ,ChangeNumberItemsListener changeNumberItemsListener) {
         this.listFoodSelected = listFoodSelected;
         managementCart= new ManagementCart(context);
         this.changeNumberItemsListener = changeNumberItemsListener;
+        decimalFormat = new DecimalFormat("#,##0.##");
     }
 
     @NonNull
@@ -40,17 +43,23 @@ public class CartListAdapter extends RecyclerView.Adapter<CartListAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-    holder.title.setText(listFoodSelected.get(position).getTitle());
-    holder.feeEachItem.setText("Rp."+listFoodSelected.get(position).getPrice());
-    holder.totalEachItem.setText("Rp"+ Math.round(listFoodSelected.get(position).getNumericCart()*listFoodSelected.get(position).getPrice()));
-    holder.num.setText(String.valueOf(listFoodSelected.get(position).getNumericCart()));
+        holder.title.setText(listFoodSelected.get(position).getTitle());
+        double price = listFoodSelected.get(position).getPrice();
+        String formattedPrice = "Rp." + decimalFormat.format(price);
+        holder.feeEachItem.setText(formattedPrice);
 
-    int drawableResourceId=holder.itemView.getContext().getResources().getIdentifier(listFoodSelected.get(position).getPicUrl(),"drawable",holder.itemView.getContext().getPackageName());
+        double total = listFoodSelected.get(position).getNumericCart() * price;
+        String formattedTotal = "Rp" + decimalFormat.format(total);
+        holder.totalEachItem.setText(formattedTotal);
 
-    Glide.with(holder.itemView.getContext())
-            .load(drawableResourceId)
-            .transform(new GranularRoundedCorners(30,30,30,30))
-            .into(holder.pic);
+        holder.num.setText(String.valueOf(listFoodSelected.get(position).getNumericCart()));
+
+        int drawableResourceId = holder.itemView.getContext().getResources().getIdentifier(listFoodSelected.get(position).getPicUrl(), "drawable", holder.itemView.getContext().getPackageName());
+
+        Glide.with(holder.itemView.getContext())
+                .load(drawableResourceId)
+                .transform(new GranularRoundedCorners(30, 30, 30, 30))
+                .into(holder.pic);
 
     holder.plusItem.setOnClickListener(view -> managementCart.plusNumberFood(listFoodSelected, position, () -> {
         notifyDataSetChanged();

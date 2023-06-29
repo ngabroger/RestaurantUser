@@ -3,7 +3,7 @@ package com.example.restaurantuser.activity;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
+import java.text.DecimalFormat;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
@@ -42,7 +42,7 @@ public class CartActivity extends AppCompatActivity {
 
     private void initList() {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL,false);
-        recyclerViewList.setLayoutManager(linearLayoutManager);
+            recyclerViewList.setLayoutManager(linearLayoutManager);
         adapter= new CartListAdapter(managementCart.getListCart(), this, new ChangeNumberItemsListener() {
             @Override
             public void changed() {
@@ -52,11 +52,13 @@ public class CartActivity extends AppCompatActivity {
             }
         });
         recyclerViewList.setAdapter(adapter);
+
+
         if(managementCart.getListCart().isEmpty()){
             emptyTxt.setVisibility(View.VISIBLE);
-            scrollView.setVisibility(View.INVISIBLE);
+            scrollView.setVisibility(View.GONE);
         }else {
-            emptyTxt.setVisibility(View.INVISIBLE);
+            emptyTxt.setVisibility(View.GONE);
             scrollView.setVisibility(View.VISIBLE);
         }
 
@@ -66,13 +68,18 @@ public class CartActivity extends AppCompatActivity {
         double  percentTxt = 0.11;
         double delivery= 35000;
         tax = Math.round((managementCart.getTotalFee()*percentTxt*100.0))/100;
-        double total =Math.round((managementCart.getTotalFee()+tax+delivery)*100.0)/100;
-        double itemTotal=Math.round(managementCart.getTotalFee()*100.0)/100.0;
+        double total =Math.round((managementCart.getTotalFee()+tax+delivery)*100)/100;
+        double itemTotal=Math.round(managementCart.getTotalFee()*100)/100;
+        DecimalFormat decimalFormat = new DecimalFormat("#,##0.##"); // Format untuk menghilangkan .0
+        String formattedItemTotal = decimalFormat.format(itemTotal);
+        String formattedTax = decimalFormat.format(tax);
+        String formattedDelivery = decimalFormat.format(delivery);
+        String formattedTotal = decimalFormat.format(total);
 
-        totalFeeTxt.setText("Rp." + itemTotal);
-        taxTxt.setText("Rp."+tax);
-        deliveryTxt.setText("Rp."+delivery);
-        totalTxt.setText("Rp." +total);
+        totalFeeTxt.setText("Rp." + formattedItemTotal);
+        taxTxt.setText("Rp." + formattedTax);
+        deliveryTxt.setText("Rp." + formattedDelivery);
+        totalTxt.setText("Rp." + formattedTotal);
     }
     private void initView() {
         totalFeeTxt=findViewById(R.id.totalFeeTxt);
