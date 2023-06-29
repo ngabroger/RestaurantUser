@@ -32,8 +32,10 @@ public class MainActivity extends AppCompatActivity {
     private void bottoNavigation() {
         LinearLayout homeBtn = findViewById(R.id.homeBtn);
         LinearLayout cartBtn = findViewById(R.id.cartBtn);
+        LinearLayout settingBtn = findViewById(R.id.settingBtn);
         homeBtn.setOnClickListener(view -> startActivity(new Intent(MainActivity.this, MainActivity.class)));
         cartBtn.setOnClickListener(view -> startActivity(new Intent(MainActivity.this, CartActivity.class)));
+        settingBtn.setOnClickListener(view -> startActivity(new Intent(MainActivity.this, SettingActivity.class)));
     }
 
     private void initRecycleView(){
