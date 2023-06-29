@@ -6,4 +6,15 @@
     </style>
 
     <style name="Theme.RestaurantUser" parent="Base.Theme.RestaurantUser" />
+    <style name="textStyle" parent="Widget.AppCompat.TextView">
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="fontFamily">@font/poppins_regular</item>
+    </style>
+    <style name="textStyleBold" parent="Widget.AppCompat.TextView">
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="fontFamily">@font/poppins_regular</item>
+    </style>
 </resources>

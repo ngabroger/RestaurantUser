@@ -230,17 +230,8 @@
                     android:layout_weight="1"
 
                     android:fontFamily="@font/poppins"
-                    android:text="The Best Menu in Restaurant" />
+                    android:text="Nuestro Menú" />
 
-                <TextView
-                    android:id="@+id/textView8"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:fontFamily="@font/poppins_medium"
-                    android:text="View All"
-                    android:textAlignment="viewEnd"
-                    android:textColor="@color/orangeCard" />
             </LinearLayout>
 
             <androidx.recyclerview.widget.RecyclerView

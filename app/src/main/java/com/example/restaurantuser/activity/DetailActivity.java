@@ -53,9 +53,11 @@ public class DetailActivity extends AppCompatActivity {
             AddToCartBtn.setText("Add To Cart " + "Rp." +Math.round(numberOrder * object.getPrice()));
         });
         minusBtn.setOnClickListener(v -> {
-            numberOrder = numberOrder - 1 ;
-            numberOrderTxt.setText(""+numberOrder);
-            AddToCartBtn.setText("add To Cart" + Math.round(numberOrder * object.getPrice()));
+            if (numberOrder > 1) {
+                numberOrder = numberOrder - 1;
+                numberOrderTxt.setText(""+numberOrder);
+                AddToCartBtn.setText("Add To Cart " + "Rp." + Math.round(numberOrder * object.getPrice()));
+            }
         });
         AddToCartBtn.setOnClickListener(v -> {
             object.setNumericCart(numberOrder);
