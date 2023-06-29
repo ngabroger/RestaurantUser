@@ -16,7 +16,7 @@ import com.example.restaurantuser.R;
 public class DetailActivity extends AppCompatActivity {
     private Button AddToCartBtn;
     private TextView plustBtn,minusBtn,titleTxt,feeTxt,DescriptionTxt,numberOrderTxt,startTxt,categoryTxt,timeTxt;
-    private ImageView picFood;
+    private ImageView picFood,backBtn;
     private FoodDomain object;
     private int numberOrder = 1;
     private ManagementCart managementCart;
@@ -28,6 +28,11 @@ public class DetailActivity extends AppCompatActivity {
     managementCart = new ManagementCart(DetailActivity.this);
     initView();
     getBundle();
+    setVariable();
+    }
+
+    private void setVariable() {
+        backBtn.setOnClickListener(view -> finish());
     }
 
     private void getBundle() {
@@ -78,5 +83,6 @@ public class DetailActivity extends AppCompatActivity {
         startTxt= findViewById(R.id.ratingTxt);
         categoryTxt = findViewById(R.id.categoryTxt);
         timeTxt = findViewById(R.id.timeTxt);
+        backBtn=findViewById(R.id.backBtnDetail);
     }
 }

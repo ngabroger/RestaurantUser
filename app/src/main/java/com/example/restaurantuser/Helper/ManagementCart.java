@@ -34,7 +34,34 @@ public class ManagementCart {
         tinyDB.putListObject("cartList",listfood);
         Toast.makeText(context,"Add To Your Cart",Toast.LENGTH_SHORT).show();
     }
+
+
     public ArrayList<FoodDomain>  getListCart(){
         return tinyDB.getListObject("cartList");
     }
+    public void minusNumberFood(ArrayList <FoodDomain> listfood,int position, ChangeNumberItemsListener changeNumberItemsListener){
+        if (listfood.get(position).getNumericCart()==1){
+            listfood.remove(position);
+        }else {
+            listfood.get(position).setNumericCart(listfood.get(position).getNumericCart()-1);
+        }
+        tinyDB.putListObject("CartList",listfood);
+        changeNumberItemsListener.changed();
+    }
+    public void plusNumberFood(ArrayList<FoodDomain> listfood,int position ,ChangeNumberItemsListener changeNumberItemsListener){
+        listfood.get(position).setNumericCart(listfood.get(position).getNumericCart());
+        tinyDB.putListObject("CartList", listfood);
+        changeNumberItemsListener.changed();
+    }
+    public double getTotalFee(){
+        ArrayList<FoodDomain> listfood2=getListCart();
+        double fee =0;
+        for (int i = 0; i < listfood2.size(); i++) {
+            fee =fee +(listfood2.get(i).getPrice()*listfood2.get(i).getNumericCart());
+        }
+        return  fee;
+    }
+
 }
+
+

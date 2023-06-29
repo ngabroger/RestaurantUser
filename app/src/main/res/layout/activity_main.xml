@@ -269,11 +269,11 @@
                 >
 
                 <LinearLayout
+                    android:id="@+id/homeBtn"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="0.25"
-                    android:orientation="vertical"
-                    >
+                    android:orientation="vertical">
 
                     <ImageView
                         android:id="@+id/homeView"
@@ -296,8 +296,8 @@
                 </LinearLayout>
 
 
-
                 <LinearLayout
+                    android:id="@+id/cartBtn"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="0.25"
@@ -323,11 +323,12 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/settingBtn"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
+                    android:layout_marginEnd="15dp"
                     android:layout_weight="0.25"
-                    android:orientation="vertical"
-                    android:layout_marginEnd="15dp">
+                    android:orientation="vertical">
 
                     <ImageView
                         android:id="@+id/btnViewsettings"

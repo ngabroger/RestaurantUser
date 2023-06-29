@@ -30,7 +30,7 @@
                     app:srcCompat="@drawable/fast_1" />
 
                 <ImageView
-                    android:id="@+id/imageView6"
+                    android:id="@+id/backBtnDetail"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="24dp"
@@ -229,7 +229,6 @@
                     android:id="@+id/descriptionTxt"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="24dp"
                     android:fontFamily="@font/poppins_regular"
                     android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam maximus est erat, ac consequat dui suscipit nec. Fusce ante neque, bibendum ac malesuada laoreet, hendrerit at dolor. Quisque porta tempor nibh et iaculis. Nulla facilisi. "
                     android:textSize="16sp"

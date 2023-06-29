@@ -5,7 +5,10 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.LinearLayout;
 
 import com.example.restaurantuser.Domain.FoodDomain;
 import com.example.restaurantuser.R;
@@ -23,7 +26,16 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         initRecycleView();
+        bottoNavigation();
     }
+
+    private void bottoNavigation() {
+        LinearLayout homeBtn = findViewById(R.id.homeBtn);
+        LinearLayout cartBtn = findViewById(R.id.cartBtn);
+        homeBtn.setOnClickListener(view -> startActivity(new Intent(MainActivity.this, MainActivity.class)));
+        cartBtn.setOnClickListener(view -> startActivity(new Intent(MainActivity.this, CartActivity.class)));
+    }
+
     private void initRecycleView(){
         ArrayList<FoodDomain> items = new ArrayList<>();
         items.add(new FoodDomain("BIG Burger","The best food On our Menu that ever made in our restaurant , try now before it's gone to our world","fast_1",50000,44,"Food",4));
