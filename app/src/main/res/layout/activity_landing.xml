@@ -12,7 +12,7 @@
         android:id="@+id/imageView6"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:scaleType="centerCrop"
+        android:scaleType="fitXY"
         android:src="@drawable/background_landing"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -62,7 +62,7 @@
             app:layout_constraintTop_toBottomOf="@+id/textView28" />
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/button2"
+            android:id="@+id/signInBtn"
             android:layout_width="350dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="25dp"
@@ -77,15 +77,15 @@
             app:layout_constraintTop_toBottomOf="@+id/textView29" />
 
         <TextView
-            android:id="@+id/textView21"
+            android:id="@+id/signUpBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
             android:fontFamily="@font/poppins_regular"
             android:text="Don't have Account? "
             android:textColor="@color/white"
-            app:layout_constraintStart_toStartOf="@+id/button2"
-            app:layout_constraintTop_toBottomOf="@+id/button2" />
+            app:layout_constraintStart_toStartOf="@+id/signInBtn"
+            app:layout_constraintTop_toBottomOf="@+id/signInBtn" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

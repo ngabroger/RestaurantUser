@@ -29,7 +29,7 @@
         app:srcCompat="@drawable/arrow" />
 
     <ImageView
-        android:id="@+id/imageView12"
+        android:id="@+id/imageView10"
         android:layout_width="100dp"
         android:layout_height="100dp"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout4"
@@ -41,13 +41,37 @@
     <LinearLayout
         android:id="@+id/linearLayout4"
         android:layout_width="match_parent"
-        android:layout_height="400dp"
+        android:layout_height="600dp"
         android:background="@drawable/background_sign"
         android:orientation="vertical"
         android:padding="32dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
+
+        <TextView
+            android:id="@+id/textView25"
+            style="@style/textStyleBold"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Username"
+            android:textSize="20sp" />
+
+        <EditText
+            android:id="@+id/editTextText2"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="24dp"
+            android:background="@drawable/edittext_background"
+            android:ems="10"
+            android:fontFamily="@font/poppins_regular"
+            android:hint="Your Name"
+            android:inputType="text"
+            android:padding="8dp"
+            android:textColor="#8e8e8e"
+            android:textColorHint="#8e8e8e"
+            tools:textSize="18sp" />
 
         <TextView
             android:id="@+id/textView22"
@@ -74,11 +98,34 @@
             tools:textSize="18sp" />
 
         <TextView
-            android:id="@+id/textView31"
+            android:id="@+id/textView34"
             style="@style/textStyleBold"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Password"
+            android:textSize="20sp" />
+
+        <EditText
+            android:id="@+id/editTextText7"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="24dp"
+            android:background="@drawable/edittext_background"
+            android:ems="10"
+            android:hint="***********"
+            android:inputType="text"
+            android:padding="8dp"
+            android:textColor="#8e8e8e"
+            android:textSize="18sp"
+            tools:inputType="textPassword" />
+
+        <TextView
+            android:id="@+id/textView31"
+            style="@style/textStyleBold"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Re-Password"
             android:textSize="20sp" />
 
         <EditText
@@ -97,15 +144,15 @@
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/button3"
+            style="@android:style/Widget.Button"
             android:layout_width="match_parent"
             android:layout_height="55dp"
+            android:layout_marginTop="48dp"
             android:background="@drawable/background_orange"
-            android:text="Login"
-            style="@android:style/Widget.Button"
             android:fontFamily="@font/poppins"
-            android:textSize="20sp"
+            android:text="Register"
             android:textColor="@color/white"
-            android:layout_marginTop="48dp"/>
+            android:textSize="20sp" />
 
     </LinearLayout>
 

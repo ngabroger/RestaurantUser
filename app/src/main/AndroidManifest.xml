@@ -13,11 +13,21 @@
         android:theme="@style/Theme.RestaurantUser"
         tools:targetApi="31">
         <activity
-            android:name=".activity.loginActivity"
+            android:name=".activity.registerActivity"
             android:exported="false" />
         <activity
+            android:name=".activity.loginActivity"
+            android:exported="false"/>
+
+        <activity
             android:name=".activity.landingActivity"
-            android:exported="false" />
+            android:exported="true" >
+        <intent-filter>
+            <action android:name="android.intent.action.MAIN" />
+
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent-filter>
+        </activity>
         <activity
             android:name=".activity.SettingActivity"
             android:exported="false" />
@@ -29,13 +39,10 @@
             android:exported="false" />
         <activity
             android:name=".activity.MainActivity"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+            android:exported="false"/>
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+
+
     </application>
 
 </manifest>
