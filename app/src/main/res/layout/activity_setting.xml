@@ -94,7 +94,7 @@
                     android:fontFamily="@font/poppins_medium"
                     android:text="ACCOUNT"
                     android:textColor="#706C6C"
-                    android:textSize="12sp"
+                    android:textSize="15sp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -110,25 +110,25 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="14dp"
-                    android:fontFamily="@font/poppins"
+                    android:fontFamily="@font/poppins_medium"
                     android:text="Profile Data"
                     android:textColor="@color/black"
-                    android:textSize="14sp"
+                    android:textSize="20sp"
                     app:layout_constraintStart_toEndOf="@+id/viewpersonbaseline"
                     app:layout_constraintTop_toTopOf="@+id/viewpersonbaseline" />
 
                 <ImageView
                     android:id="@+id/viewpersonbaseline"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:srcCompat="@drawable/baseline_person_outline_24" />
 
                 <ImageView
                     android:id="@+id/arrowUserData"
-                    android:layout_width="15dp"
-                    android:layout_height="15dp"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
                     app:layout_constraintBottom_toBottomOf="@+id/textUserProfile"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="@+id/textUserProfile"
@@ -153,25 +153,25 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="14dp"
-                    android:fontFamily="@font/poppins"
+                    android:fontFamily="@font/poppins_medium"
                     android:text="Change Password"
                     android:textColor="@color/black"
-                    android:textSize="14sp"
+                    android:textSize="20sp"
                     app:layout_constraintStart_toEndOf="@+id/imageView14"
                     app:layout_constraintTop_toTopOf="@+id/imageView14" />
 
                 <ImageView
                     android:id="@+id/imageView14"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:srcCompat="@drawable/baseline_remove_red_eye_24" />
 
                 <ImageView
                     android:id="@+id/imageView15"
-                    android:layout_width="15dp"
-                    android:layout_height="15dp"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
                     app:layout_constraintBottom_toBottomOf="@+id/textView23"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="@+id/textView23"
@@ -190,7 +190,7 @@
                     android:fontFamily="@font/poppins_medium"
                     android:text="SETTINGS"
                     android:textColor="#706C6C"
-                    android:textSize="12sp"
+                    android:textSize="15sp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -203,8 +203,8 @@
 
                 <ImageView
                     android:id="@+id/imageView17"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:srcCompat="@drawable/baseline_question_mark_24" />
@@ -214,17 +214,17 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="14dp"
-                    android:fontFamily="@font/poppins"
+                    android:fontFamily="@font/poppins_medium"
                     android:text="About App"
                     android:textColor="@color/black"
-                    android:textSize="14sp"
+                    android:textSize="20sp"
                     app:layout_constraintStart_toEndOf="@+id/imageView17"
                     app:layout_constraintTop_toTopOf="@+id/imageView17" />
 
                 <ImageView
                     android:id="@+id/imageView18"
-                    android:layout_width="15dp"
-                    android:layout_height="15dp"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
                     app:layout_constraintBottom_toBottomOf="@+id/textView26"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="@+id/textView26"
@@ -246,8 +246,8 @@
 
                 <ImageView
                     android:id="@+id/imageView19"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:srcCompat="@drawable/baseline_logout_24" />
@@ -257,17 +257,18 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="14dp"
-                    android:fontFamily="@font/poppins"
+                    android:fontFamily="@font/poppins_medium"
                     android:text="Log Out"
                     android:textColor="@color/black"
+                    android:textSize="20sp"
                     app:layout_constraintBottom_toBottomOf="@+id/imageView19"
                     app:layout_constraintStart_toEndOf="@+id/imageView19"
                     app:layout_constraintTop_toTopOf="@+id/imageView19" />
 
                 <ImageView
                     android:id="@+id/imageView20"
-                    android:layout_width="15dp"
-                    android:layout_height="15dp"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
                     app:layout_constraintBottom_toBottomOf="@+id/textView27"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="@+id/textView27"

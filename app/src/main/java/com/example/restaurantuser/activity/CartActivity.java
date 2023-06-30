@@ -80,6 +80,14 @@ public class CartActivity extends AppCompatActivity {
         taxTxt.setText("Rp." + formattedTax);
         deliveryTxt.setText("Rp." + formattedDelivery);
         totalTxt.setText("Rp." + formattedTotal);
+
+        if (managementCart.getListCart().isEmpty()) {
+            emptyTxt.setVisibility(View.VISIBLE);
+            scrollView.setVisibility(View.GONE);
+        } else {
+            emptyTxt.setVisibility(View.GONE);
+            scrollView.setVisibility(View.VISIBLE);
+        }
     }
     private void initView() {
         totalFeeTxt=findViewById(R.id.totalFeeTxt);
