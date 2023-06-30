@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "966711067410",
+    "firebase_url": "https://diningrestaurant-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "diningrestaurant",
+    "storage_bucket": "diningrestaurant.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:966711067410:android:466e5ca6dee843618b29cb",
+        "android_client_info": {
+          "package_name": "com.example.restaurantuser"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "966711067410-rjnji0265ihdchne9o4uvsoe6rubhspc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDxCjJX_993oaiwjXdflEL0x07uwwLSo28"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "966711067410-rjnji0265ihdchne9o4uvsoe6rubhspc.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
