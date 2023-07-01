@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     tools:context=".activity.profileActivity">
 
     <LinearLayout
@@ -23,7 +24,7 @@
             android:padding="24dp">
 
             <ImageView
-                android:id="@+id/imageView11"
+                android:id="@+id/backProfileBtn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:srcCompat="@drawable/arrow" />
@@ -47,7 +48,7 @@
             android:layout_height="wrap_content">
 
             <ImageView
-                android:id="@+id/imageView16"
+                android:id="@+id/picUserView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
@@ -57,16 +58,16 @@
                 app:srcCompat="@drawable/profile" />
 
             <TextView
-                android:id="@+id/textView30"
+                android:id="@+id/changePhotoProfileBtn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:fontFamily="@font/poppins_medium"
                 android:text="Change Photo Profile"
                 android:textColor="@color/orangeCard"
-                app:layout_constraintEnd_toEndOf="@+id/imageView16"
-                app:layout_constraintStart_toStartOf="@+id/imageView16"
-                app:layout_constraintTop_toBottomOf="@+id/imageView16" />
+                app:layout_constraintEnd_toEndOf="@+id/picUserView"
+                app:layout_constraintStart_toStartOf="@+id/picUserView"
+                app:layout_constraintTop_toBottomOf="@+id/picUserView" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -104,11 +105,12 @@
                     android:textSize="14sp" />
 
                 <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/usernameEditBtn"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
 
                     <TextView
-                        android:id="@+id/textView42"
+                        android:id="@+id/nameProfileTxt"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/poppins_regular"
@@ -123,9 +125,9 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:backgroundTint="@color/black"
-                        app:layout_constraintBottom_toBottomOf="@+id/textView42"
+                        app:layout_constraintBottom_toBottomOf="@+id/nameProfileTxt"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="@+id/textView42"
+                        app:layout_constraintTop_toTopOf="@+id/nameProfileTxt"
                         app:srcCompat="@drawable/arrow_detail"
                         app:tint="@color/black" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
@@ -170,7 +172,7 @@
                     android:layout_height="match_parent">
 
                     <TextView
-                        android:id="@+id/textView43"
+                        android:id="@+id/userIdTxt"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/poppins_regular"
@@ -180,16 +182,6 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
-                    <ImageView
-                        android:id="@+id/imageView22"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:backgroundTint="@color/black"
-                        app:layout_constraintBottom_toBottomOf="@+id/textView43"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="@+id/textView43"
-                        app:srcCompat="@drawable/arrow_detail"
-                        app:tint="@color/black" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
             </LinearLayout>
@@ -205,9 +197,59 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
             android:padding="16dp">
+
+            <LinearLayout
+                android:id="@+id/linearLayout7"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/textView44"
+                app:layout_constraintTop_toBottomOf="@+id/textView44">
+
+                <TextView
+                    android:id="@+id/textView46"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="86dp"
+                    android:fontFamily="@font/poppins_regular"
+                    android:text="Email"
+                    android:textColor="#767981"
+                    android:textSize="14sp" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/emailEditBtn"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:id="@+id/emailProfileTxt"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/poppins_regular"
+                        android:text="example@email.com"
+                        android:textColor="@color/black"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <ImageView
+                        android:id="@+id/imageView13"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintBottom_toBottomOf="@+id/emailProfileTxt"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="@+id/emailProfileTxt"
+                        app:srcCompat="@drawable/arrow_detail"
+                        app:tint="@color/black" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            </LinearLayout>
 
             <TextView
                 android:id="@+id/textView44"
@@ -222,36 +264,97 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:id="@+id/linearLayout9"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:orientation="horizontal"
                 app:layout_constraintStart_toStartOf="@+id/textView44"
-                app:layout_constraintTop_toBottomOf="@+id/textView44">
+                app:layout_constraintTop_toBottomOf="@+id/linearLayout7">
 
                 <TextView
-                    android:id="@+id/textView46"
+                    android:id="@+id/textView47"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="86dp"
-                    android:layout_weight="1"
-                    android:text="Email"
+                    android:layout_marginEnd="73dp"
+                    android:fontFamily="@font/poppins_regular"
+                    android:text="Alamat"
                     android:textColor="#767981"
                     android:textSize="14sp" />
 
                 <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/alamatEditBtn"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1">
+                    android:layout_height="match_parent">
 
                     <TextView
-                        android:id="@+id/textView48"
+                        android:id="@+id/alamatProfileTxt"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="example@email.com"
+                        android:fontFamily="@font/poppins_regular"
+                        android:text="alamat belum dibuat ...."
+                        android:textColor="@color/black"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
+
+                    <ImageView
+                        android:id="@+id/imageView65"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintBottom_toBottomOf="@+id/alamatProfileTxt"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="@+id/alamatProfileTxt"
+                        app:srcCompat="@drawable/arrow_detail"
+                        app:tint="@color/black" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:orientation="horizontal"
+                app:layout_constraintStart_toStartOf="@+id/textView44"
+                app:layout_constraintTop_toBottomOf="@+id/linearLayout9">
+
+                <TextView
+                    android:id="@+id/textView75"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="33dp"
+                    android:fontFamily="@font/poppins_regular"
+                    android:text="Tanggal lahir"
+                    android:textColor="#767981"
+                    android:textSize="14sp" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/tanggalLahirEditBtn"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:id="@+id/tanggalLahirProfileTxt"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/poppins_regular"
+                        android:text="Tanggal Lahir belum dibuat ...."
+                        android:textColor="@color/black"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <ImageView
+                        android:id="@+id/imageView72"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintBottom_toBottomOf="@+id/tanggalLahirProfileTxt"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="@+id/tanggalLahirProfileTxt"
+                        app:srcCompat="@drawable/arrow_detail"
+                        app:tint="@color/black" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
 

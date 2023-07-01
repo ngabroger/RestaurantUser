@@ -19,7 +19,7 @@ public class SettingActivity extends AppCompatActivity {
 private ImageView backButton;
 private TextView usernameSettingTxt, emailSettingTxt;
     private FirebaseUser firebaseUser;
-private ConstraintLayout logOutBtn,changePasswordBtn;
+private ConstraintLayout logOutBtn,changePasswordBtn,profileDataBtn;
     private ProgressDialog progressDialog;
 
     @Override
@@ -57,6 +57,14 @@ private ConstraintLayout logOutBtn,changePasswordBtn;
                 startActivity(new Intent(getApplicationContext(), changePassActivity.class));
             }
         });
+
+        profileDataBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getApplicationContext(), profileActivity.class));
+            }
+        });
+
     }
 
     private void initView(){
@@ -65,6 +73,7 @@ private ConstraintLayout logOutBtn,changePasswordBtn;
         usernameSettingTxt  = findViewById(R.id.usernameSettingTxt);
         emailSettingTxt = findViewById(R.id.emailSettingTxt);
         changePasswordBtn = findViewById(R.id.changePasswordBtn);
+        profileDataBtn = findViewById(R.id.profileDataBtn);
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         progressDialog = new ProgressDialog(SettingActivity.this);
         progressDialog.setTitle("Loading");
