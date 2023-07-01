@@ -9,7 +9,8 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
-
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 import com.example.restaurantuser.R;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
@@ -23,6 +24,7 @@ public class changePassActivity extends AppCompatActivity {
     private ImageView backBtnPassword;
     private LinearLayout saveBtn;
     private FirebaseAuth mAuth;
+
     private ProgressDialog progressDialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
