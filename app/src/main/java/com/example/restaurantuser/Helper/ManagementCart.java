@@ -20,7 +20,7 @@ public class ManagementCart {
         boolean existAlready  = false;
         int n= 0 ;
         for ( int y = 0;y< listfood.size();y++){
-            if(listfood.get(y).getTitle().equals(item.getTitle())){
+            if(listfood.get(y).getNama().equals(item.getNama())){
                 existAlready = true ;
                 n = y;
                 break;
@@ -53,15 +53,15 @@ public class ManagementCart {
         tinyDB.putListObject("CartList", listfood);
         changeNumberItemsListener.changed();
     }
-    public double getTotalFee(){
-        ArrayList<FoodDomain> listfood2=getListCart();
-        double fee =0;
+    public double getTotalFee() {
+        ArrayList<FoodDomain> listfood2 = getListCart();
+        double fee = 0;
         for (int i = 0; i < listfood2.size(); i++) {
-            fee =fee +(listfood2.get(i).getPrice()*listfood2.get(i).getNumericCart());
+            int harga = Integer.parseInt(listfood2.get(i).getHarga());
+            fee = fee + (harga * listfood2.get(i).getNumericCart());
         }
-        return  fee;
+        return fee;
     }
-
 }
 
 

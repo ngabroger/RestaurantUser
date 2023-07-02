@@ -3,57 +3,76 @@ package com.example.restaurantuser.Domain;
 import java.io.Serializable;
 
 public class FoodDomain implements Serializable {
-    private String title;
-    private String description;
-    private String picUrl;
-    private int price;
+    private String nama;
+    private String deskripsi;
+    private String foto;
+    private String harga;
+    private String kode;
+    private String kategori;
     private int times;
-    private String Category;
     private double score;
     private int numericCart;
 
-
-    public FoodDomain(String title, String description, String picUrl, int price, int times, String category, double score) {
-        this.title = title;
-        this.description = description;
-        this.picUrl = picUrl;
-        this.price = price;
-        this.times = times;
-        Category = category;
-        this.score = score;
-
+    public FoodDomain() {
+        // Diperlukan oleh Firebase untuk membuat objek dari data yang diambil dari database
     }
 
-    public String getTitle() {
-        return title;
+
+    public FoodDomain(String nama, String deskripsi, String foto, String harga, String kode, String kategori) {
+        this.nama = nama;
+        this.deskripsi = deskripsi;
+        this.foto = foto;
+        this.harga = harga;
+        this.kode = kode;
+        this.kategori = kategori;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public String getNama() {
+        return nama;
     }
 
-    public String getDescription() {
-        return description;
+    public void setNama(String nama) {
+        this.nama = nama;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public String getDeskripsi() {
+        return deskripsi;
     }
 
-    public String getPicUrl() {
-        return picUrl;
+    public void setDeskripsi(String deskripsi) {
+        this.deskripsi = deskripsi;
     }
 
-    public void setPicUrl(String picUrl) {
-        this.picUrl = picUrl;
+    public String getFoto() {
+        return foto;
     }
 
-    public int getPrice() {
-        return price;
+    public void setFoto(String foto) {
+        this.foto = foto;
     }
 
-    public void setPrice(int price) {
-        this.price = price;
+    public String getHarga() {
+        return harga;
+    }
+
+    public void setHarga(String harga) {
+        this.harga = harga;
+    }
+
+    public String getKode() {
+        return kode;
+    }
+
+    public void setKode(String kode) {
+        this.kode = kode;
+    }
+
+    public String getKategori() {
+        return kategori;
+    }
+
+    public void setKategori(String kategori) {
+        this.kategori = kategori;
     }
 
     public int getTimes() {
@@ -62,14 +81,6 @@ public class FoodDomain implements Serializable {
 
     public void setTimes(int times) {
         this.times = times;
-    }
-
-    public String getCategory() {
-        return Category;
-    }
-
-    public void setCategory(String category) {
-        Category = category;
     }
 
     public double getScore() {

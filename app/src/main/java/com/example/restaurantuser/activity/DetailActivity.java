@@ -37,31 +37,31 @@ public class DetailActivity extends AppCompatActivity {
 
     private void getBundle() {
         object= (FoodDomain) getIntent().getSerializableExtra("object");
-        int drawableResourceId= this.getResources().getIdentifier(object.getPicUrl(),"drawable",this.getPackageName());
+        int drawableResourceId= this.getResources().getIdentifier(object.getFoto(),"drawable",this.getPackageName());
         Glide.with(this)
                 .load(drawableResourceId)
                 .into(picFood);
 
 
-        titleTxt.setText((object.getTitle()));
-        feeTxt.setText(("Rp"+object.getPrice()));
-        DescriptionTxt.setText(object.getDescription());
+        titleTxt.setText((object.getNama()));
+        feeTxt.setText(("Rp"+object.getHarga()));
+        DescriptionTxt.setText(object.getDeskripsi());
         numberOrderTxt.setText(""+numberOrder);
-        categoryTxt.setText(object.getCategory());
+        categoryTxt.setText(object.getKategori());
         startTxt.setText(object.getScore()+"");
         timeTxt.setText(object.getTimes()+" min");
-        AddToCartBtn.setText("Add To Cart " + "Rp." +Math.round(numberOrder * object.getPrice()));
+        AddToCartBtn.setText("Add To Cart " + "Rp." + (int) Math.round(numberOrder * Double.parseDouble(object.getHarga())));
 
         plustBtn.setOnClickListener(v -> {
             numberOrder = numberOrder + 1 ;
             numberOrderTxt.setText(""+numberOrder);
-            AddToCartBtn.setText("Add To Cart " + "Rp." +Math.round(numberOrder * object.getPrice()));
+            AddToCartBtn.setText("Add To Cart " + "Rp." + (int) Math.round(numberOrder * Double.parseDouble(object.getHarga())));
         });
         minusBtn.setOnClickListener(v -> {
             if (numberOrder > 1) {
                 numberOrder = numberOrder - 1;
                 numberOrderTxt.setText(""+numberOrder);
-                AddToCartBtn.setText("Add To Cart " + "Rp." + Math.round(numberOrder * object.getPrice()));
+                AddToCartBtn.setText("Add To Cart " + "Rp." + (int) Math.round(numberOrder * Double.parseDouble(object.getHarga())));
             }
         });
         AddToCartBtn.setOnClickListener(v -> {

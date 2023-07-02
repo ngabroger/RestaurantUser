@@ -43,8 +43,8 @@ public class CartListAdapter extends RecyclerView.Adapter<CartListAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.title.setText(listFoodSelected.get(position).getTitle());
-        double price = listFoodSelected.get(position).getPrice();
+        holder.title.setText(listFoodSelected.get(position).getNama());
+        int price = Integer.parseInt(listFoodSelected.get(position).getHarga());
         String formattedPrice = "Rp." + decimalFormat.format(price);
         holder.feeEachItem.setText(formattedPrice);
 
@@ -54,7 +54,7 @@ public class CartListAdapter extends RecyclerView.Adapter<CartListAdapter.ViewHo
 
         holder.num.setText(String.valueOf(listFoodSelected.get(position).getNumericCart()));
 
-        int drawableResourceId = holder.itemView.getContext().getResources().getIdentifier(listFoodSelected.get(position).getPicUrl(), "drawable", holder.itemView.getContext().getPackageName());
+        int drawableResourceId = holder.itemView.getContext().getResources().getIdentifier(listFoodSelected.get(position).getFoto(), "drawable", holder.itemView.getContext().getPackageName());
 
         Glide.with(holder.itemView.getContext())
                 .load(drawableResourceId)

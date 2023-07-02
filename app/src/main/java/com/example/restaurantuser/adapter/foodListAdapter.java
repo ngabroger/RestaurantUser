@@ -16,43 +16,44 @@ import com.bumptech.glide.load.resource.bitmap.GranularRoundedCorners;
 import com.example.restaurantuser.Domain.FoodDomain;
 import com.example.restaurantuser.R;
 import com.example.restaurantuser.activity.DetailActivity;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 
 public class foodListAdapter extends RecyclerView.Adapter<foodListAdapter.ViewHolder> {
     ArrayList<FoodDomain> items;
     Context context;
+    DatabaseReference databaseReference;
 
-    public foodListAdapter(ArrayList<FoodDomain> items) {
+    public foodListAdapter(Context context, ArrayList<FoodDomain> items) {
         this.items = items;
+        this.context = context;
+        databaseReference = FirebaseDatabase.getInstance().getReference();
     }
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View inflate = LayoutInflater.from((parent.getContext())).inflate(R.layout.viewholder_food_list,parent,false);
-        context = parent.getContext();
-        return new ViewHolder(inflate);
+        LayoutInflater layoutInflater = LayoutInflater.from(context);
+        View view = layoutInflater.inflate(R.layout.viewholder_food_list, parent, false);
+        return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.textTitleFood.setText(items.get(position).getTitle());
-        holder.textPrice.setText("Rp."+items.get(position).getPrice());
-        holder.textScore.setText(""+items.get(position).getScore());
-        int drawableResourceID = holder.itemView.getResources().getIdentifier(items.get(position).getPicUrl(),"drawable",holder.itemView.getContext().getPackageName());
+        FoodDomain product = items.get(position);
+        holder.productName.setText(product.getNama());
+        holder.productPrice.setText(String.format("Rp %s", product.getHarga()));
+        Glide.with(context)
+                .load(product.getFoto())
+                .transform(new GranularRoundedCorners(40, 40, 0, 0))
+                .into(holder.productImage);
 
-        Glide.with(holder.itemView.getContext()).
-                load(drawableResourceID)
-                .transform(new GranularRoundedCorners(30,30,0,0))
-                .into(holder.pic);
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(holder.itemView.getContext(), DetailActivity.class);
-                intent.putExtra("object", items.get(position));
-                holder.itemView.getContext().startActivity(intent);
-            }
+        holder.itemView.setOnClickListener(view -> {
+            Intent detailIntent = new Intent(context, DetailActivity.class);
+            detailIntent.putExtra("productId", product.getNama());
+            context.startActivity(detailIntent);
         });
     }
 
@@ -61,15 +62,16 @@ public class foodListAdapter extends RecyclerView.Adapter<foodListAdapter.ViewHo
         return items.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder{
-TextView textTitleFood,textPrice,textScore;
-ImageView pic;
+    public static class ViewHolder extends RecyclerView.ViewHolder {
+        ImageView productImage;
+        TextView productName;
+        TextView productPrice;
+
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            textTitleFood = itemView.findViewById(R.id.textTitleFood);
-            textPrice = itemView.findViewById(R.id.textPrice);
-            textScore= itemView.findViewById(R.id.textScore);
-            pic = itemView.findViewById(R.id.picFood);
+            productImage = itemView.findViewById(R.id.picFood);
+            productName = itemView.findViewById(R.id.textTitleFood);
+            productPrice = itemView.findViewById(R.id.textPrice);
         }
     }
 }

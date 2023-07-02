@@ -12,6 +12,12 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.bumptech.glide.Glide;
@@ -21,23 +27,40 @@ import com.example.restaurantuser.adapter.foodListAdapter;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+import org.checkerframework.checker.nullness.qual.NonNull;
+
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
     private RecyclerView.Adapter adapterFoodList;
+    private DatabaseReference databaseReference;
             private RecyclerView recyclerViewFood;
             private FirebaseUser firebaseUser;
             private ImageView  imageProfile;
             private TextView usernameTxt;
+            private ArrayList<FoodDomain> items;
+            private foodListAdapter adapter;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        initRecycleView();
         bottoNavigation();
         displayUser();
+
+        bottoNavigation();
+        FirebaseDatabase.getInstance().setPersistenceEnabled(true);
+        databaseReference = FirebaseDatabase.getInstance().getReference().child("products");
+
+        recyclerViewFood = findViewById(R.id.viewBest);
+        recyclerViewFood.setLayoutManager(new GridLayoutManager(this, 2));
+
+        items = new ArrayList<>();
+        adapter = new foodListAdapter(MainActivity.this, items);
+        recyclerViewFood.setAdapter(adapter);
+
+        readData();
     }
 
     @SuppressLint("SetTextI18n")
@@ -77,15 +100,25 @@ public class MainActivity extends AppCompatActivity {
         
     }
 
-    private void initRecycleView(){
-        ArrayList<FoodDomain> items = new ArrayList<>();
-        items.add(new FoodDomain("BIG Burger","The best food On our Menu that ever made in our restaurant , try now before it's gone to our world","fast_1",50000,44,"Food",4));
-        items.add(new FoodDomain("Pizza","You know Pizza , if you know you know the delicious this food ever made , from italy to our los polos hermanos","fast_2",75000,42,"Food",3));
-        items.add(new FoodDomain("Vegetable Pizza","for vegan we made , this pizza made from love to vegan , believe that shit n**ga","fast_3",80000,44,"Food",4));
 
-        recyclerViewFood=findViewById((R.id.viewBest));
-        recyclerViewFood.setLayoutManager(new GridLayoutManager(this,2));
-        adapterFoodList = new foodListAdapter(items);
-        recyclerViewFood.setAdapter(adapterFoodList);
+
+
+    private void readData() {
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                items.clear();
+                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                    FoodDomain foodDomain = dataSnapshot.getValue(FoodDomain.class);
+                    items.add(foodDomain);
+                }
+                adapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                // Tangani kesalahan jika diperlukan
+            }
+        });
     }
 }
