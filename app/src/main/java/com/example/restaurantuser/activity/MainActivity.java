@@ -9,9 +9,12 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.bumptech.glide.Glide;
 import com.example.restaurantuser.Domain.FoodDomain;
 import com.example.restaurantuser.R;
 import com.example.restaurantuser.adapter.foodListAdapter;
@@ -24,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView.Adapter adapterFoodList;
             private RecyclerView recyclerViewFood;
             private FirebaseUser firebaseUser;
+            private ImageView  imageProfile;
             private TextView usernameTxt;
 
 
@@ -38,8 +42,23 @@ public class MainActivity extends AppCompatActivity {
 
     @SuppressLint("SetTextI18n")
     private void displayUser() {
-        if (firebaseUser.getDisplayName()!=null) {
+        firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+        if (firebaseUser.getDisplayName()!=null && firebaseUser.getPhotoUrl()!=null) {
             usernameTxt.setText(firebaseUser.getDisplayName());
+
+            FirebaseStorage storage = FirebaseStorage.getInstance();
+            StorageReference storageRef = storage.getReference();
+            StorageReference profileImageRef = storageRef.child("profile_images/"+firebaseUser.getUid()+ ".jpg");
+            profileImageRef.getDownloadUrl().addOnSuccessListener(uri -> {
+                // Menggunakan Glide untuk memuat foto profil dari URL
+                Glide.with(this)
+                        .load(uri)
+                        .circleCrop()
+                        .into(imageProfile);
+            }).addOnFailureListener(exception -> {
+                // Jika gagal mendapatkan URL foto profil, tampilkan placeholder atau gambar default
+                imageProfile.setImageResource(R.drawable.logolph);
+            });
         }else {
             usernameTxt.setText("Login Gagal!");
         }
@@ -49,6 +68,7 @@ public class MainActivity extends AppCompatActivity {
         LinearLayout homeBtn = findViewById(R.id.homeBtn);
         LinearLayout cartBtn = findViewById(R.id.cartBtn);
         LinearLayout settingBtn = findViewById(R.id.settingBtn);
+        imageProfile = findViewById(R.id.imageView);
         homeBtn.setOnClickListener(view -> startActivity(new Intent(MainActivity.this, MainActivity.class)));
         cartBtn.setOnClickListener(view -> startActivity(new Intent(MainActivity.this, CartActivity.class)));
         settingBtn.setOnClickListener(view -> startActivity(new Intent(MainActivity.this, SettingActivity.class)));

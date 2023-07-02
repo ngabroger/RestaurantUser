@@ -25,6 +25,9 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
 
 import java.io.ByteArrayOutputStream;
@@ -63,36 +66,44 @@ public class registerActivity extends AppCompatActivity {
     }
 
     private void register(String username, String emailRegister, String passwordRegister) {
-        Drawable defaultIcon = getResources().getDrawable(R.drawable.baseline_account_circle_24);
+        Drawable defaultIcon = getResources().getDrawable(R.drawable.personimg);
         Bitmap bitmap = ((BitmapDrawable) defaultIcon).getBitmap();
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         bitmap.compress(Bitmap.CompressFormat.PNG, 100, baos);
         byte[] data = baos.toByteArray();
+        StorageReference storageRef = FirebaseStorage.getInstance().getReference();
+
 
         progressDialog.show();
 
-        mAuth.createUserWithEmailAndPassword(emailRegister,passwordRegister)
+        mAuth.createUserWithEmailAndPassword(emailRegister, passwordRegister)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful() && task.getResult()!=null){
+                        if (task.isSuccessful() && task.getResult() != null) {
                             FirebaseUser firebaseUser = task.getResult().getUser();
                             if (firebaseUser != null) {
+                                StorageReference imageRef = storageRef.child("profile_images/"+firebaseUser.getUid()+ ".jpg");
+                                UploadTask uploadTask = imageRef.putBytes(data);
+                                // Mengatur URL gambar default sebagai foto profil pengguna baru
                                 UserProfileChangeRequest request = new UserProfileChangeRequest.Builder()
                                         .setDisplayName(username)
+                                        .setPhotoUri(Uri.parse(imageRef.getPath()))
                                         .build();
+
                                 firebaseUser.updateProfile(request).addOnCompleteListener(new OnCompleteListener<Void>() {
                                     @Override
                                     public void onComplete(@NonNull Task<Void> task) {
+
                                         reload();
                                     }
                                 });
-                            }else {
-                                Toast.makeText(getApplicationContext(),"Register Gagal",Toast.LENGTH_SHORT).show();
+                            } else {
+                                Toast.makeText(getApplicationContext(), "Register Gagal", Toast.LENGTH_SHORT).show();
                                 progressDialog.dismiss();
                             }
-                        }else {
-                            Toast.makeText(getApplicationContext(),task.getException().getLocalizedMessage(),Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(getApplicationContext(), task.getException().getLocalizedMessage(), Toast.LENGTH_SHORT).show();
                             progressDialog.dismiss();
                         }
                     }

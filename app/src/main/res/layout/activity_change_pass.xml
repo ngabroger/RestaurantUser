@@ -89,6 +89,7 @@
                android:paddingStart="15dp"
                 android:fontFamily="@font/poppins"
                 android:hint="******"
+
                 android:textSize="20sp"
                 android:background="@drawable/edittext_password"/>
 

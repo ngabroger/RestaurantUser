@@ -11,13 +11,17 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.example.restaurantuser.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 public class SettingActivity extends AppCompatActivity {
-private ImageView backButton;
+private ImageView backButton,imageSetting;
 private TextView usernameSettingTxt, emailSettingTxt;
+
     private FirebaseUser firebaseUser;
 private ConstraintLayout logOutBtn,changePasswordBtn,profileDataBtn;
     private ProgressDialog progressDialog;
@@ -35,6 +39,20 @@ private ConstraintLayout logOutBtn,changePasswordBtn,profileDataBtn;
         if (firebaseUser.getDisplayName()!=null && firebaseUser.getEmail()!=null) {
             usernameSettingTxt.setText(firebaseUser.getDisplayName());
             emailSettingTxt.setText(firebaseUser.getEmail());
+
+            FirebaseStorage storage = FirebaseStorage.getInstance();
+            StorageReference storageRef = storage.getReference();
+            StorageReference profileImageRef = storageRef.child("profile_images/"+firebaseUser.getUid()+ ".jpg");
+            profileImageRef.getDownloadUrl().addOnSuccessListener(uri -> {
+
+                Glide.with(this)
+                        .load(uri)
+                        .circleCrop()
+                        .into(imageSetting);
+            }).addOnFailureListener(exception -> {
+
+                imageSetting.setImageResource(R.drawable.logolph);
+            });
         }else {
             usernameSettingTxt.setText("Login Gagal!");
             emailSettingTxt.setText("email nya mana bang");
@@ -74,6 +92,7 @@ private ConstraintLayout logOutBtn,changePasswordBtn,profileDataBtn;
         emailSettingTxt = findViewById(R.id.emailSettingTxt);
         changePasswordBtn = findViewById(R.id.changePasswordBtn);
         profileDataBtn = findViewById(R.id.profileDataBtn);
+        imageSetting = findViewById(R.id.imageSetting);
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         progressDialog = new ProgressDialog(SettingActivity.this);
         progressDialog.setTitle("Loading");
