@@ -13,10 +13,14 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.example.restaurantuser.R;
+import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+
+import java.io.File;
 
 public class SettingActivity extends AppCompatActivity {
 private ImageView backButton,imageSetting;
@@ -65,13 +69,20 @@ private ConstraintLayout logOutBtn,changePasswordBtn,profileDataBtn;
             public void onClick(View view) {
                 progressDialog.show();
                 FirebaseAuth.getInstance().signOut();
-                startActivity(new Intent(getApplicationContext(), landingActivity.class));
+                Intent intent = new Intent(getApplicationContext(), landingActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(intent);
+
+                finish();
+
+
             }
         });
 
         changePasswordBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                progressDialog.dismiss();
                 startActivity(new Intent(getApplicationContext(), changePassActivity.class));
             }
         });
@@ -79,6 +90,7 @@ private ConstraintLayout logOutBtn,changePasswordBtn,profileDataBtn;
         profileDataBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                progressDialog.dismiss();
                 startActivity(new Intent(getApplicationContext(), profileActivity.class));
             }
         });
@@ -100,4 +112,7 @@ private ConstraintLayout logOutBtn,changePasswordBtn,profileDataBtn;
         progressDialog.setCancelable(false);
 
     }
+
+
+
 }

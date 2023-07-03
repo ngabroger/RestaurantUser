@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
             private RecyclerView recyclerViewFood;
             private FirebaseUser firebaseUser;
             private ImageView  imageProfile;
-            private TextView usernameTxt;
+            private TextView usernameTxt,alamatHomeTxt;
             private ArrayList<FoodDomain> items;
             private foodListAdapter adapter;
 
@@ -46,12 +46,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        bottoNavigation();
-        displayUser();
 
         bottoNavigation();
-        FirebaseDatabase.getInstance().setPersistenceEnabled(true);
-        databaseReference = FirebaseDatabase.getInstance().getReference().child("products");
 
         recyclerViewFood = findViewById(R.id.viewBest);
         recyclerViewFood.setLayoutManager(new GridLayoutManager(this, 2));
@@ -59,6 +55,9 @@ public class MainActivity extends AppCompatActivity {
         items = new ArrayList<>();
         adapter = new foodListAdapter(MainActivity.this, items);
         recyclerViewFood.setAdapter(adapter);
+
+
+        displayUser();
 
         readData();
     }
@@ -68,7 +67,25 @@ public class MainActivity extends AppCompatActivity {
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         if (firebaseUser.getDisplayName()!=null && firebaseUser.getPhotoUrl()!=null) {
             usernameTxt.setText(firebaseUser.getDisplayName());
+            DatabaseReference userRef = FirebaseDatabase.getInstance().getReference().child("users").child(firebaseUser.getUid());
+            userRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    if (snapshot.exists()) {
+                        String alamat = snapshot.child("alamat").getValue(String.class);
+                        // Update your UI or perform actions with the address data
+                        alamatHomeTxt.setText(alamat);
 
+                    }else{
+                        alamatHomeTxt.setText("alamatnya tidak ada tolong logout bang");
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+                    // Handle any errors that occur during data retrieval
+                }
+            });
             FirebaseStorage storage = FirebaseStorage.getInstance();
             StorageReference storageRef = storage.getReference();
             StorageReference profileImageRef = storageRef.child("profile_images/"+firebaseUser.getUid()+ ".jpg");
@@ -88,11 +105,14 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void bottoNavigation() {
+        FirebaseDatabase.getInstance().setPersistenceEnabled(true);
+        databaseReference = FirebaseDatabase.getInstance().getReference().child("products");
         LinearLayout homeBtn = findViewById(R.id.homeBtn);
         LinearLayout cartBtn = findViewById(R.id.cartBtn);
+        alamatHomeTxt = findViewById(R.id.alamatHomeTxt);
         LinearLayout settingBtn = findViewById(R.id.settingBtn);
         imageProfile = findViewById(R.id.imageView);
-        homeBtn.setOnClickListener(view -> startActivity(new Intent(MainActivity.this, MainActivity.class)));
+
         cartBtn.setOnClickListener(view -> startActivity(new Intent(MainActivity.this, CartActivity.class)));
         settingBtn.setOnClickListener(view -> startActivity(new Intent(MainActivity.this, SettingActivity.class)));
         usernameTxt =findViewById(R.id.displayUsernameTxt);
