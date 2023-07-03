@@ -16,6 +16,9 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.example.restaurantuser.Domain.UserDomain;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import android.view.View;
 import android.widget.ProgressBar;
 import com.example.restaurantuser.R;
@@ -25,6 +28,7 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
+import com.google.firebase.firestore.auth.User;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
@@ -38,6 +42,7 @@ public class registerActivity extends AppCompatActivity {
     private Button registerBtn;
     private ProgressDialog progressDialog;
     private FirebaseAuth mAuth;
+    private FirebaseDatabase firebaseDatabase;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,8 +50,6 @@ public class registerActivity extends AppCompatActivity {
         setContentView(R.layout.activity_register);
         initView();
         buttonInteraction();
-
-
     }
 
     private void buttonInteraction() {
@@ -82,8 +85,14 @@ public class registerActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful() && task.getResult() != null) {
                             FirebaseUser firebaseUser = task.getResult().getUser();
+
                             if (firebaseUser != null) {
                                 StorageReference imageRef = storageRef.child("profile_images/"+firebaseUser.getUid()+ ".jpg");
+                                DatabaseReference userRef = firebaseDatabase.getReference().child("users").child(firebaseUser.getUid());
+                                UserDomain user = new UserDomain();
+                                user.setUserId(firebaseUser.getUid());
+                                user.setAlamat("Alamat belum diatur");
+                                user.setTanggalLahir("Tanggal lahir belum diatur");
                                 UploadTask uploadTask = imageRef.putBytes(data);
                                 // Mengatur URL gambar default sebagai foto profil pengguna baru
                                 UserProfileChangeRequest request = new UserProfileChangeRequest.Builder()
@@ -94,8 +103,20 @@ public class registerActivity extends AppCompatActivity {
                                 firebaseUser.updateProfile(request).addOnCompleteListener(new OnCompleteListener<Void>() {
                                     @Override
                                     public void onComplete(@NonNull Task<Void> task) {
+                                        userRef.setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                            @Override
+                                            public void onComplete(@NonNull Task<Void> task) {
+                                                if (task.isSuccessful()){
+                                                    reload();
+                                                }else {
+                                                    Toast.makeText(getApplicationContext(), "Gagal Menyimpan ke database", Toast.LENGTH_SHORT).show();
+                                                    progressDialog.dismiss();
+                                                }
 
-                                        reload();
+                                            }
+                                        });
+
+
                                     }
                                 });
                             } else {
@@ -117,7 +138,15 @@ public class registerActivity extends AppCompatActivity {
         passwordRegisterTxt = findViewById(R.id.passwordRegisterTxt);
         passwordRetRegisterTxt = findViewById(R.id.passwordRetRegisterTxt);
         registerBtn= findViewById(R.id.registerBtn);
+
+//        Aktivasi Di firebaseDatabase
+        FirebaseDatabase.getInstance().setPersistenceEnabled(true);
+        firebaseDatabase = FirebaseDatabase.getInstance();
+//        mAuth untuk authentication user untuk register
         mAuth = FirebaseAuth.getInstance();
+
+
+//        progress dialog seperti loading segala macem ngab
         progressDialog = new ProgressDialog(registerActivity.this);
         progressDialog.setTitle("Loading");
         progressDialog.setMessage("silahkan tunggu");

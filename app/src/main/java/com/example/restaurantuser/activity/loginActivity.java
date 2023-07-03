@@ -1,5 +1,4 @@
 package com.example.restaurantuser.activity;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -20,6 +19,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class loginActivity extends AppCompatActivity {
     private ImageView backViewLogin;
@@ -33,8 +33,10 @@ public class loginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         initView();
-        btnInteraction();
 
+
+        FirebaseDatabase.getInstance().setPersistenceEnabled(true);
+        btnInteraction();
     }
 
     private void btnInteraction() {
@@ -89,6 +91,7 @@ public class loginActivity extends AppCompatActivity {
         super.onStart();
         // Check if user is signed in (non-null) and update UI accordingly.
         FirebaseUser currentUser = mAuth.getCurrentUser();
+
         if(currentUser != null){
             reload();
         }

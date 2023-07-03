@@ -27,12 +27,11 @@ import java.util.ArrayList;
 public class foodListAdapter extends RecyclerView.Adapter<foodListAdapter.ViewHolder> {
     ArrayList<FoodDomain> items;
     Context context;
-    DatabaseReference databaseReference;
+
 
     public foodListAdapter(Context context, ArrayList<FoodDomain> items) {
         this.items = items;
         this.context = context;
-        databaseReference = FirebaseDatabase.getInstance().getReference();
     }
 
     @NonNull
