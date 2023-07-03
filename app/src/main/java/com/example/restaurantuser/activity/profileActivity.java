@@ -93,8 +93,6 @@ public class profileActivity extends AppCompatActivity {
                 // Handle any errors that occur during data retrieval
             }
         });
-
-
     }
 
     private void btnWorking() {

@@ -132,6 +132,9 @@ public class registerActivity extends AppCompatActivity {
     }
 
     private void initView() {
+        //        Aktivasi Di firebaseDatabase
+        FirebaseDatabase.getInstance().setPersistenceEnabled(true);
+        firebaseDatabase = FirebaseDatabase.getInstance();
         backViewRegister = findViewById(R.id.backViewRegister);
         usernameTxt = findViewById(R.id.usernameTxt);
         emailRegisterTxt = findViewById(R.id.emailRegisterTxt);
@@ -139,9 +142,7 @@ public class registerActivity extends AppCompatActivity {
         passwordRetRegisterTxt = findViewById(R.id.passwordRetRegisterTxt);
         registerBtn= findViewById(R.id.registerBtn);
 
-//        Aktivasi Di firebaseDatabase
-        FirebaseDatabase.getInstance().setPersistenceEnabled(true);
-        firebaseDatabase = FirebaseDatabase.getInstance();
+
 //        mAuth untuk authentication user untuk register
         mAuth = FirebaseAuth.getInstance();
 

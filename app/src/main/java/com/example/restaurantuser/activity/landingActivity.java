@@ -22,7 +22,6 @@ private TextView signUp;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_landing);
-        FirebaseDatabase.getInstance().setPersistenceEnabled(true);
         initView();
         navigationButton();
         autoMainActivity();
