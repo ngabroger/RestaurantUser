@@ -13,11 +13,14 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.GranularRoundedCorners;
+import com.bumptech.glide.request.target.Target;
 import com.example.restaurantuser.Domain.FoodDomain;
 import com.example.restaurantuser.R;
 import com.example.restaurantuser.activity.DetailActivity;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
 
@@ -44,16 +47,22 @@ public class foodListAdapter extends RecyclerView.Adapter<foodListAdapter.ViewHo
         FoodDomain product = items.get(position);
         holder.productName.setText(product.getNama());
         holder.productPrice.setText(String.format("Rp %s", product.getHarga()));
-        Glide.with(context)
-                .load(product.getFoto())
-                .transform(new GranularRoundedCorners(40, 40, 0, 0))
-                .into(holder.productImage);
-
+        FirebaseStorage storage = FirebaseStorage.getInstance();
+        StorageReference storageRef = storage.getReference();
+        StorageReference ImageRef = storageRef.child("images/"+product.getFoto());
+        ImageRef.getDownloadUrl().addOnSuccessListener(url -> {
+                    Glide.with(context)
+                            .load(url)
+                            .transform(new GranularRoundedCorners(40, 40, 0, 0))
+                            .into(holder.productImage);
+                }).addOnFailureListener(exception -> {
+        });
         holder.itemView.setOnClickListener(view -> {
             Intent detailIntent = new Intent(context, DetailActivity.class);
-            detailIntent.putExtra("productId", product.getNama());
+            detailIntent.putExtra("object", product); // Add the object as an extra
             context.startActivity(detailIntent);
         });
+
     }
 
     @Override

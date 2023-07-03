@@ -9,9 +9,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.bitmap.GranularRoundedCorners;
 import com.example.restaurantuser.Domain.FoodDomain;
 import com.example.restaurantuser.Helper.ManagementCart;
 import com.example.restaurantuser.R;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 public class DetailActivity extends AppCompatActivity {
     private Button AddToCartBtn;
@@ -37,10 +40,16 @@ public class DetailActivity extends AppCompatActivity {
 
     private void getBundle() {
         object= (FoodDomain) getIntent().getSerializableExtra("object");
-        int drawableResourceId= this.getResources().getIdentifier(object.getFoto(),"drawable",this.getPackageName());
-        Glide.with(this)
-                .load(drawableResourceId)
-                .into(picFood);
+
+        FirebaseStorage storage = FirebaseStorage.getInstance();
+        StorageReference storageRef = storage.getReference();
+        StorageReference ImageRef = storageRef.child("images/"+object.getFoto());
+        ImageRef.getDownloadUrl().addOnSuccessListener(url -> {
+            Glide.with(this)
+                    .load(url)
+                    .into(picFood);
+        }).addOnFailureListener(exception -> {
+        });
 
 
         titleTxt.setText((object.getNama()));
