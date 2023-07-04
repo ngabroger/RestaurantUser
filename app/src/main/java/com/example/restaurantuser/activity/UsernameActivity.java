@@ -3,6 +3,7 @@ package com.example.restaurantuser.activity;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -45,7 +46,7 @@ public class UsernameActivity extends AppCompatActivity {
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                finish();
+                startActivity(new Intent(getApplicationContext(), profileActivity.class));
                 progressDialog.show();
             }
         });
@@ -84,6 +85,5 @@ public class UsernameActivity extends AppCompatActivity {
         progressDialog.setTitle("Loading");
         progressDialog.setMessage("silahkan tunggu");
         progressDialog.setCancelable(false);
-
     }
 }

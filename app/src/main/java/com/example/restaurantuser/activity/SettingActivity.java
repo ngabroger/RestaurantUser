@@ -12,13 +12,20 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.example.restaurantuser.Domain.UserDomain;
 import com.example.restaurantuser.R;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+
+import org.checkerframework.checker.nullness.qual.NonNull;
 
 import java.io.File;
 
@@ -40,30 +47,50 @@ private ConstraintLayout logOutBtn,changePasswordBtn,profileDataBtn;
     }
     @SuppressLint("SetTextI18n")
     private void displayUser() {
-        if (firebaseUser.getDisplayName()!=null && firebaseUser.getEmail()!=null) {
-            usernameSettingTxt.setText(firebaseUser.getDisplayName());
-            emailSettingTxt.setText(firebaseUser.getEmail());
 
-            FirebaseStorage storage = FirebaseStorage.getInstance();
-            StorageReference storageRef = storage.getReference();
-            StorageReference profileImageRef = storageRef.child("profile_images/"+firebaseUser.getUid()+ ".jpg");
-            profileImageRef.getDownloadUrl().addOnSuccessListener(uri -> {
+        FirebaseStorage storage = FirebaseStorage.getInstance();
+        StorageReference storageRef = storage.getReference();
+        StorageReference profileImageRef = storageRef.child("profile_images/"+firebaseUser.getUid()+ ".jpg");
+        profileImageRef.getDownloadUrl().addOnSuccessListener(uri -> {
+            // Menggunakan Glide untuk memuat foto profil dari URL
+            Glide.with(this)
+                    .load(uri)
+                    .circleCrop()
+                    .into(imageSetting);
+        }).addOnFailureListener(exception -> {
+            // Jika gagal mendapatkan URL foto profil, tampilkan placeholder atau gambar default
+            imageSetting.setImageResource(R.drawable.logolph);
+        });
 
-                Glide.with(this)
-                        .load(uri)
-                        .circleCrop()
-                        .into(imageSetting);
-            }).addOnFailureListener(exception -> {
+        DatabaseReference userRef = FirebaseDatabase.getInstance().getReference().child("users").child(firebaseUser.getUid());
 
-                imageSetting.setImageResource(R.drawable.logolph);
-            });
-        }else {
-            usernameSettingTxt.setText("Login Gagal!");
-            emailSettingTxt.setText("email nya mana bang");
-        }
+        userRef.addListenerForSingleValueEvent(new ValueEventListener() {
+
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                UserDomain user = snapshot.getValue(UserDomain.class);
+                if (user != null) {
+                    usernameSettingTxt.setText(firebaseUser.getDisplayName());
+                    emailSettingTxt.setText(firebaseUser.getEmail());
+
+                }else{
+
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                // Handle any errors that occur during data retrieval
+            }
+        });
     }
     private void setVariable() {
-        backButton.setOnClickListener(view -> finish());
+        backButton.setOnClickListener(view -> {
+            progressDialog.show();
+            startActivity(new Intent(getApplicationContext(),MainActivity.class));
+            progressDialog.dismiss();
+
+                });
         logOutBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

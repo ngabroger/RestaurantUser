@@ -8,10 +8,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -55,8 +57,6 @@ public class MainActivity extends AppCompatActivity {
         items = new ArrayList<>();
         adapter = new foodListAdapter(MainActivity.this, items);
         recyclerViewFood.setAdapter(adapter);
-
-
         displayUser();
 
         readData();
@@ -74,7 +74,11 @@ public class MainActivity extends AppCompatActivity {
                     if (snapshot.exists()) {
                         String alamat = snapshot.child("alamat").getValue(String.class);
                         // Update your UI or perform actions with the address data
-                        alamatHomeTxt.setText(alamat);
+                        if (TextUtils.isEmpty(alamat)) {
+                            alamatHomeTxt.setText("Alamat belum diatur");
+                        } else {
+                            alamatHomeTxt.setText(alamat);
+                        }
 
                     }else{
                         alamatHomeTxt.setText("alamatnya tidak ada tolong logout bang");
@@ -105,15 +109,41 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void bottoNavigation() {
-        FirebaseDatabase.getInstance().setPersistenceEnabled(true);
         databaseReference = FirebaseDatabase.getInstance().getReference().child("products");
         LinearLayout homeBtn = findViewById(R.id.homeBtn);
         LinearLayout cartBtn = findViewById(R.id.cartBtn);
         alamatHomeTxt = findViewById(R.id.alamatHomeTxt);
         LinearLayout settingBtn = findViewById(R.id.settingBtn);
         imageProfile = findViewById(R.id.imageView);
+        cartBtn.setOnClickListener(new View.OnClickListener() {
+            String alamat = alamatHomeTxt.getText().toString();
+            @Override
+            public void onClick(View view) {
+                DatabaseReference userRef = FirebaseDatabase.getInstance().getReference().child("users").child(firebaseUser.getUid());
+                userRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        if (snapshot.exists()) {
+                            String alamat = snapshot.child("alamat").getValue(String.class);
+                            if (TextUtils.isEmpty(alamat)) {
+                                Intent intent = new Intent(MainActivity.this, AlamatActivity.class);
+                                startActivity(intent);
+                                Toast.makeText(MainActivity.this, "Tolong Isi Alamat terlebih dahulu", Toast.LENGTH_SHORT).show();
+                            } else {
+                                startActivity(new Intent(MainActivity.this, CartActivity.class));
+                            }
+                        } else {
+                            // Data pengguna tidak ada
+                        }
+                    }
 
-        cartBtn.setOnClickListener(view -> startActivity(new Intent(MainActivity.this, CartActivity.class)));
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+                        // Tangani kesalahan yang terjadi saat mengambil data
+                    }
+                });
+            }
+        });
         settingBtn.setOnClickListener(view -> startActivity(new Intent(MainActivity.this, SettingActivity.class)));
         usernameTxt =findViewById(R.id.displayUsernameTxt);
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();

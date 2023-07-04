@@ -196,7 +196,7 @@
                     app:srcCompat="@drawable/location" />
 
                 <TextView
-                    android:id="@+id/textView18"
+                    android:id="@+id/alamatCartTxt"
                     style="@style/textStyleBold"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -207,10 +207,10 @@
                     app:layout_constraintTop_toTopOf="@+id/imageView3" />
 
                 <ImageView
-                    android:id="@+id/imageView5"
+                    android:id="@+id/alamatIntentBtn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:layout_constraintBottom_toBottomOf="@+id/textView18"
+                    app:layout_constraintBottom_toBottomOf="@+id/alamatCartTxt"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="@+id/textView17"
                     app:srcCompat="@drawable/arrow_detail" />
@@ -222,9 +222,9 @@
                     android:layout_marginTop="8dp"
                     android:layout_marginBottom="8dp"
                     android:background="#D3D3D3"
-                    app:layout_constraintEnd_toEndOf="@+id/imageView5"
+                    app:layout_constraintEnd_toEndOf="@+id/alamatIntentBtn"
                     app:layout_constraintStart_toStartOf="@+id/imageView3"
-                    app:layout_constraintTop_toBottomOf="@+id/textView18" />
+                    app:layout_constraintTop_toBottomOf="@+id/alamatCartTxt" />
 
                 <TextView
                     android:id="@+id/textView19"

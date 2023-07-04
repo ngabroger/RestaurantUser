@@ -20,25 +20,26 @@
 
     <TextView
         android:id="@+id/titleTxt"
+        style="@style/textStyleBold"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Title"
-        style="@style/textStyleBold"
         android:layout_marginTop="16dp"
-        android:layout_marginStart="8dp"
-        app:layout_constraintStart_toEndOf="@+id/pic"
+        android:text="Title"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="@+id/feeEachItem"
         app:layout_constraintTop_toTopOf="@+id/pic" />
 
-        <TextView
+    <TextView
         android:id="@+id/feeEachItem"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:fontFamily="@font/poppins_regular"
         android:text="Rp."
-            android:fontFamily="@font/poppins_regular"
-            android:textColor="@color/orangeCard"
-            android:textSize="18sp"
+        android:textColor="@color/orangeCard"
+        android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="@+id/pic"
-        app:layout_constraintStart_toStartOf="@+id/titleTxt"
+        app:layout_constraintStart_toEndOf="@+id/pic"
         app:layout_constraintTop_toBottomOf="@+id/titleTxt" />
 
     <TextView
@@ -48,7 +49,7 @@
         android:fontFamily="@font/poppins"
         android:text="Rp."
         android:textColor="@color/orangeCard"
-        android:textSize="18sp"
+        android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="@+id/titleTxt"
         app:layout_constraintEnd_toEndOf="@+id/constraintLayout"
         app:layout_constraintTop_toTopOf="@+id/titleTxt" />

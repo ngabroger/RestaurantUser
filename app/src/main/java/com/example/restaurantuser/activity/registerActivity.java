@@ -2,7 +2,6 @@ package com.example.restaurantuser.activity;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -91,7 +90,7 @@ public class registerActivity extends AppCompatActivity {
                                 DatabaseReference userRef = firebaseDatabase.getReference().child("users").child(firebaseUser.getUid());
                                 UserDomain user = new UserDomain();
                                 user.setUserId(firebaseUser.getUid());
-                                user.setAlamat("Alamat belum diatur");
+                                user.setAlamat("");
                                 user.setTanggalLahir("Tanggal lahir belum diatur");
                                 UploadTask uploadTask = imageRef.putBytes(data);
                                 // Mengatur URL gambar default sebagai foto profil pengguna baru
@@ -133,7 +132,6 @@ public class registerActivity extends AppCompatActivity {
 
     private void initView() {
         //        Aktivasi Di firebaseDatabase
-        FirebaseDatabase.getInstance().setPersistenceEnabled(true);
         firebaseDatabase = FirebaseDatabase.getInstance();
         backViewRegister = findViewById(R.id.backViewRegister);
         usernameTxt = findViewById(R.id.usernameTxt);

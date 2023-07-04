@@ -33,9 +33,6 @@ public class loginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         initView();
-
-
-        FirebaseDatabase.getInstance().setPersistenceEnabled(true);
         btnInteraction();
     }
 

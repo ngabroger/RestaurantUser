@@ -8,11 +8,13 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.bumptech.glide.Glide;
+import com.example.restaurantuser.Domain.UserDomain;
 import com.example.restaurantuser.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -25,6 +27,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.firestore.auth.User;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
@@ -74,13 +77,18 @@ public class profileActivity extends AppCompatActivity {
 
         DatabaseReference userRef = FirebaseDatabase.getInstance().getReference().child("users").child(firebaseUser.getUid());
         userRef.addListenerForSingleValueEvent(new ValueEventListener() {
+
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if (snapshot.exists()) {
+                UserDomain user = snapshot.getValue(UserDomain.class);
+                if (user != null) {
                     String alamat = snapshot.child("alamat").getValue(String.class);
                     String tanggallahir = snapshot.child("tanggalLahir").getValue(String.class);
-                    // Update your UI or perform actions with the address data
-                    alamatProfileTxt.setText(alamat);
+                    if (TextUtils.isEmpty(alamat)) {
+                        alamatProfileTxt.setText("Alamat belum diatur");
+                    } else {
+                        alamatProfileTxt.setText(alamat);
+                    }
                     tanggalLahirProfileTxt.setText(tanggallahir);
 
                 }else{
@@ -100,10 +108,23 @@ public class profileActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 progressDialog.show();
-                finish();
+                startActivity(new Intent(getApplicationContext(), SettingActivity.class));
+                progressDialog.dismiss();
             }
         });
 
+        alamatEditBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getApplicationContext(),AlamatActivity.class));
+            }
+        });
+        tanggalLahirBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getApplicationContext(),tanggalLahirActivity.class));
+            }
+        });
         changePhotoProfileBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -116,8 +137,8 @@ public class profileActivity extends AppCompatActivity {
         usernameEditBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(profileActivity.this, UsernameActivity.class));
                 progressDialog.show();
+                startActivity(new Intent(profileActivity.this, UsernameActivity.class));
                 progressDialog.dismiss();
             }
         });
