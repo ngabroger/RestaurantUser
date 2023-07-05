@@ -91,6 +91,8 @@ public class registerActivity extends AppCompatActivity {
                                 UserDomain user = new UserDomain();
                                 user.setUserId(firebaseUser.getUid());
                                 user.setAlamat("");
+                                user.setEmail(firebaseUser.getEmail());
+                                user.setCategory("user");
                                 user.setTanggalLahir("Tanggal lahir belum diatur");
                                 UploadTask uploadTask = imageRef.putBytes(data);
                                 // Mengatur URL gambar default sebagai foto profil pengguna baru

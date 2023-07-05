@@ -113,6 +113,7 @@
                 android:fontFamily="@font/poppins"
                 android:hint="Masukan Alamat Lengkap"
                 android:paddingStart="15dp"
+                android:textColorHint="#c4c4c6"
                 android:textColor="#444444"
                 android:maxLength="200"
                 android:textSize="14sp" />

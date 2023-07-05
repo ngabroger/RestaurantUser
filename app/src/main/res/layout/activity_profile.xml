@@ -61,7 +61,8 @@
                 android:id="@+id/changePhotoProfileBtn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="22dp"
+                android:textSize="16dp"
                 android:fontFamily="@font/poppins_medium"
                 android:text="Change Photo Profile"
                 android:textColor="@color/orangeCard"
@@ -102,7 +103,7 @@
                     android:gravity="center"
                     android:text="Username"
                     android:textColor="#767981"
-                    android:textSize="14sp" />
+                    android:textSize="16sp" />
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/usernameEditBtn"
@@ -116,6 +117,7 @@
                         android:fontFamily="@font/poppins_regular"
                         android:text="Your name"
                         android:textColor="@color/black"
+                        android:textSize="16sp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
@@ -138,11 +140,10 @@
                 android:id="@+id/textView39"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
                 android:fontFamily="@font/poppins"
                 android:text="Info Profile"
                 android:textColor="@color/black"
-                android:textSize="16sp"
+                android:textSize="18sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -160,12 +161,12 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:layout_marginEnd="80dp"
+                    android:layout_marginEnd="83dp"
                     android:fontFamily="@font/poppins_regular"
                     android:gravity="center"
                     android:text="User Id"
                     android:textColor="#767981"
-                    android:textSize="14sp" />
+                    android:textSize="16sp" />
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
@@ -178,6 +179,7 @@
                         android:fontFamily="@font/poppins_regular"
                         android:text="XXXXXXXX"
                         android:textColor="@color/black"
+                        android:textSize="16sp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
@@ -215,11 +217,11 @@
                     android:id="@+id/textView46"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="86dp"
+                    android:layout_marginEnd="88dp"
                     android:fontFamily="@font/poppins_regular"
                     android:text="Email"
                     android:textColor="#767981"
-                    android:textSize="14sp" />
+                    android:textSize="16sp" />
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/emailEditBtn"
@@ -233,6 +235,7 @@
                         android:fontFamily="@font/poppins_regular"
                         android:text="example@email.com"
                         android:textColor="@color/black"
+                        android:textSize="16sp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
@@ -250,7 +253,7 @@
                 android:fontFamily="@font/poppins"
                 android:text="Personal Info"
                 android:textColor="@color/black"
-                android:textSize="16sp"
+                android:textSize="18sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -271,7 +274,7 @@
                     android:fontFamily="@font/poppins_regular"
                     android:text="Alamat"
                     android:textColor="#767981"
-                    android:textSize="14sp" />
+                    android:textSize="16sp" />
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/alamatEditBtn"
@@ -285,6 +288,7 @@
                         android:fontFamily="@font/poppins_regular"
                         android:text="alamat belum dibuat ...."
                         android:textColor="@color/black"
+                        android:textSize="16sp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
@@ -315,11 +319,11 @@
                     android:id="@+id/textView75"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="33dp"
+                    android:layout_marginEnd="26dp"
                     android:fontFamily="@font/poppins_regular"
                     android:text="Tanggal lahir"
                     android:textColor="#767981"
-                    android:textSize="14sp" />
+                    android:textSize="16sp" />
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/tanggalLahirEditBtn"
@@ -333,6 +337,7 @@
                         android:fontFamily="@font/poppins_regular"
                         android:text="Tanggal Lahir belum dibuat ...."
                         android:textColor="@color/black"
+                        android:textSize="16sp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />

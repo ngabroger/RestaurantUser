@@ -29,7 +29,7 @@
                 android:padding="20dp">
 
                 <ImageView
-                    android:id="@+id/backBtnUsername"
+                    android:id="@+id/backTanggalLahirBtn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -96,10 +96,12 @@
                     android:clickable="true"
                     android:drawableStart="@drawable/baseline_date_range_24"
                     android:drawablePadding="5dp"
+                    android:drawableTint="#c4c4c6"
                     android:focusable="false"
                     android:focusableInTouchMode="false"
-                    android:fontFamily="@font/poppins_regular"
+                    android:fontFamily="@font/poppins"
                     android:hint="Tanggal Lahir"
+                    android:textColorHint="#c4c4c6"
                     android:inputType="none" />
 
             </com.google.android.material.textfield.TextInputLayout>

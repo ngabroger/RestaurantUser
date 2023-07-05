@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activity.AboutAppActivity">
+    <ImageView
+        android:id="@+id/imageView9"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/white_background"
+        android:scaleType="fitXY"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/background_sign2" />
+    <ImageView
+        android:id="@+id/backAboutBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="24dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/arrow" />
+    <ImageView
+        android:id="@+id/imageView10"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginBottom="24dp"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout4"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/backAboutBtn"
+        app:srcCompat="@drawable/logolph" />
+    <LinearLayout
+        android:id="@+id/linearLayout4"
+        android:layout_width="match_parent"
+        android:layout_height="600dp"
+        android:background="@drawable/background_sign"
+        android:orientation="vertical"
+        android:padding="32dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+        <TextView
+            android:id="@+id/textView25"
+            style="@style/textStyleBold"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="About App"
+            android:textSize="26sp"
+            android:layout_marginBottom="20dp"/>
+        <TextView
+            android:id="@+id/textView35"
+            style="@style/textStyle"
+            android:textColor="@color/black"
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="LPH Food adalah sebuah aplikasi mobile yang dirancang khusus untuk memudahkan pengguna dalam memesan makanan di sekitar wilayah JABODETABEK (Jakarta, Bogor, Depok, Tangerang, dan Bekasi). Dengan LPH Food, Anda tidak perlu khawatir saat lapar karena aplikasi ini menyediakan solusi praktis untuk memesan makanan favorit Anda.Dengan LPH Food, Anda tidak perlu lagi khawatir saat merasa lapar di wilayah JABODETABEK. Aplikasi ini memberikan kemudahan, kecepatan, dan keamanan dalam memesan makanan. Unduh aplikasi LPH Food sekarang dan nikmati kemudahan memesan makanan favorit Anda dengan mudah di waktu yang Anda inginkan."
+            android:textSize="16sp"
+            android:justificationMode="inter_word"
+            />
+
+        <TextView
+            android:id="@+id/textView37"
+            style="@style/textStyleBold"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:gravity="center"
+            android:text="V.0.01"
+            android:textColor="#c4c4c4"
+            android:textSize="13sp" />
+
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

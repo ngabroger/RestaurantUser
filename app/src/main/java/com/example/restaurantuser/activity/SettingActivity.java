@@ -34,8 +34,9 @@ private ImageView backButton,imageSetting;
 private TextView usernameSettingTxt, emailSettingTxt;
 
     private FirebaseUser firebaseUser;
-private ConstraintLayout logOutBtn,changePasswordBtn,profileDataBtn;
+private ConstraintLayout logOutBtn,changePasswordBtn,profileDataBtn,aboutApBtn;
     private ProgressDialog progressDialog;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -113,7 +114,14 @@ private ConstraintLayout logOutBtn,changePasswordBtn,profileDataBtn;
                 startActivity(new Intent(getApplicationContext(), changePassActivity.class));
             }
         });
+        aboutApBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                progressDialog.dismiss();
+                startActivity(new Intent(getApplicationContext(), AboutAppActivity.class));
 
+            }
+        });
         profileDataBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -132,6 +140,7 @@ private ConstraintLayout logOutBtn,changePasswordBtn,profileDataBtn;
         changePasswordBtn = findViewById(R.id.changePasswordBtn);
         profileDataBtn = findViewById(R.id.profileDataBtn);
         imageSetting = findViewById(R.id.imageSetting);
+        aboutApBtn = findViewById(R.id.aboutAppBtn);
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         progressDialog = new ProgressDialog(SettingActivity.this);
         progressDialog.setTitle("Loading");

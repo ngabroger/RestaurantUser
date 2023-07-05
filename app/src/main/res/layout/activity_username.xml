@@ -22,7 +22,7 @@
         android:padding="20dp">
 
         <ImageView
-            android:id="@+id/backBtnUsername"
+            android:id="@+id/bacTanggalLahirBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"

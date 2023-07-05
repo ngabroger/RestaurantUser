@@ -79,6 +79,7 @@
                             android:layout_marginStart="8dp"
                             android:fontFamily="@font/poppins"
                             android:text="-Min"
+                            android:textColor="@color/black"
                             app:layout_constraintBottom_toBottomOf="@+id/imgDelivery"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintHorizontal_bias="0.0"
@@ -92,6 +93,7 @@
                             android:layout_margin="8dp"
                             android:fontFamily="@font/poppins_medium"
                             android:text="Delivery"
+                            android:textColor="@color/black"
                             app:layout_constraintEnd_toEndOf="@+id/timeTxt"
                             app:layout_constraintStart_toStartOf="@+id/imgDelivery"
                             app:layout_constraintTop_toBottomOf="@+id/imgDelivery" />
@@ -126,6 +128,7 @@
                             android:layout_marginStart="8dp"
                             android:fontFamily="@font/poppins"
                             android:text="0"
+                            android:textColor="@color/black"
                             app:layout_constraintBottom_toBottomOf="@+id/imgRating"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintHorizontal_bias="0.0"
@@ -139,6 +142,7 @@
                             android:layout_margin="8dp"
                             android:fontFamily="@font/poppins_medium"
                             android:text="Rating"
+                            android:textColor="@color/black"
                             app:layout_constraintEnd_toEndOf="@+id/ratingTxt"
                             app:layout_constraintStart_toStartOf="@+id/imgRating"
                             app:layout_constraintTop_toBottomOf="@+id/imgRating" />
@@ -174,6 +178,7 @@
                             android:layout_marginStart="8dp"
                             android:fontFamily="@font/poppins"
                             android:text="Food"
+                            android:textColor="@color/black"
                             app:layout_constraintBottom_toBottomOf="@+id/imageCategory"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintHorizontal_bias="0.0"
@@ -187,6 +192,7 @@
                             android:layout_margin="8dp"
                             android:fontFamily="@font/poppins_medium"
                             android:text="Category"
+                            android:textColor="@color/black"
                             app:layout_constraintEnd_toEndOf="@+id/categoryTxt"
                             app:layout_constraintStart_toStartOf="@+id/imageCategory"
                             app:layout_constraintTop_toBottomOf="@+id/imageCategory" />
@@ -210,18 +216,22 @@
                         android:id="@+id/itemTxt"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
+
                         android:fontFamily="@font/poppins"
+                        android:gravity="center"
                         android:text="Big Burger"
                         android:textColor="@color/black"
-                        android:textSize="20dp" />
+                        android:textSize="20dp"
+                        tools:layout_gravity="center" />
 
                     <TextView
                         android:id="@+id/priceTxt"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
+                        android:layout_gravity="end"
                         android:fontFamily="@font/poppins_medium"
+                        android:gravity="end"
+                        android:layout_weight="1"
                         android:text="Rp.50000"
                         android:textAlignment="viewEnd"
                         android:textColor="@color/orangeCard"
@@ -235,6 +245,7 @@
                     android:layout_marginTop="16dp"
                     android:fontFamily="@font/poppins_regular"
                     android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam maximus est erat, ac consequat dui suscipit nec. Fusce ante neque, bibendum ac malesuada laoreet, hendrerit at dolor. Quisque porta tempor nibh et iaculis. Nulla facilisi. "
+                    android:textColor="@color/black"
                     android:textSize="16sp"
                     app:layout_constraintEnd_toEndOf="@+id/linearLayout2"
                     app:layout_constraintStart_toStartOf="@+id/linearLayout2"

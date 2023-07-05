@@ -47,6 +47,7 @@ public class DetailActivity extends AppCompatActivity {
         ImageRef.getDownloadUrl().addOnSuccessListener(url -> {
             Glide.with(this)
                     .load(url)
+                    .centerCrop()
                     .into(picFood);
         }).addOnFailureListener(exception -> {
         });

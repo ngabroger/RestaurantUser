@@ -2,27 +2,33 @@ package com.example.restaurantuser.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.MultiTransformation;
+import com.bumptech.glide.load.Transformation;
+import com.bumptech.glide.load.resource.bitmap.CenterCrop;
 import com.bumptech.glide.load.resource.bitmap.GranularRoundedCorners;
-import com.bumptech.glide.request.target.Target;
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
+import com.bumptech.glide.request.RequestOptions;
 import com.example.restaurantuser.Domain.FoodDomain;
 import com.example.restaurantuser.R;
 import com.example.restaurantuser.activity.DetailActivity;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
+
+
 
 public class foodListAdapter extends RecyclerView.Adapter<foodListAdapter.ViewHolder> {
     ArrayList<FoodDomain> items;
@@ -51,11 +57,19 @@ public class foodListAdapter extends RecyclerView.Adapter<foodListAdapter.ViewHo
         StorageReference storageRef = storage.getReference();
         StorageReference ImageRef = storageRef.child("images/"+product.getFoto());
         ImageRef.getDownloadUrl().addOnSuccessListener(url -> {
-                    Glide.with(context)
-                            .load(url)
-                            .transform(new GranularRoundedCorners(40, 40, 0, 0))
-                            .into(holder.productImage);
-                }).addOnFailureListener(exception -> {
+            Transformation<Bitmap> transformation = new MultiTransformation<>(
+                    new CenterCrop(),
+                    new GranularRoundedCorners(35 ,35 , 0 , 0)
+            );
+            RequestOptions requestOptions = new RequestOptions()
+                    .transform(transformation);
+
+            Glide.with(context)
+                    .load(url)
+                    .apply(requestOptions)
+                    .into(holder.productImage);
+        }).addOnFailureListener(exception -> {
+            // ...
         });
         holder.itemView.setOnClickListener(view -> {
             Intent detailIntent = new Intent(context, DetailActivity.class);

@@ -49,6 +49,7 @@ public class tanggalLahirActivity extends AppCompatActivity {
         datepickerInputLayout = findViewById(R.id.datepickerInputLayout);
         editTanggalLahir = findViewById(R.id.editTanggalLahir);
         saveBtn = findViewById(R.id.saveTanggalLahirBtn);
+        backBtn = findViewById(R.id.backTanggalLahirBtn);
         progressDialog = new ProgressDialog(tanggalLahirActivity.this);
         progressDialog.setTitle("Loading");
         progressDialog.setMessage("silahkan tunggu");
@@ -88,6 +89,12 @@ public class tanggalLahirActivity extends AppCompatActivity {
     }
 
     private void BtnSave(){
+        backBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getApplicationContext(), profileActivity.class));
+            }
+        });
 
         DatabaseReference userRef = firebaseDatabase.getReference().child("users").child(firebaseAuth.getUid());
         String userId = firebaseAuth.getUid();

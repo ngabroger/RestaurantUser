@@ -12,8 +12,6 @@ import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.example.restaurantuser.R;
-import com.google.firebase.auth.AuthCredential;
-import com.google.firebase.auth.EmailAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
@@ -77,7 +75,7 @@ public class UsernameActivity extends AppCompatActivity {
     }
 
     private void initView() {
-        backButton = findViewById(R.id.backBtnUsername);
+        backButton = findViewById(R.id.bacTanggalLahirBtn);
         usernameInputTxt = findViewById(R.id.editUsernameTxt);
         saveButton = findViewById(R.id.saveUsernameBtn);
         mAuth = FirebaseAuth.getInstance();
