@@ -1,18 +1,17 @@
 package com.example.restaurantuser.Domain;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 
 public class OrderData {
     private String username;
     private String address;
     private ArrayList<FoodDomain> items;
     private double totalPemesanan;
-    private long orderDateTime;
-    private int orderTime;
-    private int orderDay;
-    private int orderMonth;
-    private int orderYear;
+    private String orderDateTime;
+
 
     public OrderData() {
         // Empty constructor needed for Firebase
@@ -23,7 +22,10 @@ public class OrderData {
         this.address = address;
         this.items = items;
         this.totalPemesanan = 0;
-        this.orderDateTime = Calendar.getInstance().getTimeInMillis();
+
+        // Set orderDateTime in desired format: yyyy-MM-dd'T'HH:mm:ss.SSS'Z'
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
+        this.orderDateTime = dateFormat.format(new Date());
     }
 
     public String getUsername() {
@@ -58,43 +60,13 @@ public class OrderData {
         this.totalPemesanan = totalPemesanan;
     }
 
-    public long getOrderDateTime() {
+    public String getOrderDateTime() {
         return orderDateTime;
     }
 
-    public void setOrderDateTime(long orderDateTime) {
+    public void setOrderDateTime(String orderDateTime) {
         this.orderDateTime = orderDateTime;
     }
 
-    public int getOrderTime() {
-        return orderTime;
-    }
 
-    public void setOrderTime(int orderTime) {
-        this.orderTime = orderTime;
-    }
-
-    public int getOrderDay() {
-        return orderDay;
-    }
-
-    public void setOrderDay(int orderDay) {
-        this.orderDay = orderDay;
-    }
-
-    public int getOrderMonth() {
-        return orderMonth;
-    }
-
-    public void setOrderMonth(int orderMonth) {
-        this.orderMonth = orderMonth;
-    }
-
-    public int getOrderYear() {
-        return orderYear;
-    }
-
-    public void setOrderYear(int orderYear) {
-        this.orderYear = orderYear;
-    }
 }

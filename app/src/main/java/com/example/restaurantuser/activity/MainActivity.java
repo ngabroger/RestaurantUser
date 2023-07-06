@@ -90,7 +90,7 @@ public class MainActivity extends AppCompatActivity {
                 // No implementation needed here
             }
         });
-//govlok
+
         bottoNavigation();
 
         recyclerViewFood = findViewById(R.id.viewBest);

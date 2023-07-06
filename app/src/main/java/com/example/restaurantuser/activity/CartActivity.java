@@ -210,20 +210,15 @@ public class CartActivity extends AppCompatActivity {
             totalPemesanan += totalHarga;
         }
 
-        // Mendapatkan tanggal dan waktu saat ini
-        Calendar calendar = Calendar.getInstance();
-        int hour = calendar.get(Calendar.HOUR_OF_DAY); // Jam (0-23)
-        int day = calendar.get(Calendar.DAY_OF_MONTH); // Tanggal (1-31)
-        int month = calendar.get(Calendar.MONTH) + 1; // Bulan (0-11) -> Adjustment +1 for 1-12 range
-        int year = calendar.get(Calendar.YEAR); // Tahun
+        // Mengubah tanggal dan waktu menjadi format yang diinginkan
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
+        String orderDateTime = dateFormat.format(new Date());
 
-        // Membuat objek untuk menyimpan data pesanan
+// Membuat objek untuk menyimpan data pesanan
         OrderData orderData = new OrderData(username, address, cartItems);
         orderData.setTotalPemesanan(totalPemesanan);
-        orderData.setOrderTime(hour);
-        orderData.setOrderDay(day);
-        orderData.setOrderMonth(month);
-        orderData.setOrderYear(year);
+        orderData.setOrderDateTime(orderDateTime);
+
 
         // Menambahkan pesanan ke Firebase Realtime Database
         databaseRef.child("onlineorder").child(userId).setValue(orderData)
