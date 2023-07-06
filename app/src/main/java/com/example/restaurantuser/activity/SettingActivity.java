@@ -100,7 +100,7 @@ private ConstraintLayout logOutBtn,changePasswordBtn,profileDataBtn,aboutApBtn;
                 Intent intent = new Intent(getApplicationContext(), landingActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intent);
-
+                progressDialog.dismiss();
                 finish();
 
 

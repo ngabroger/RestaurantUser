@@ -26,6 +26,8 @@ import com.example.restaurantuser.activity.DetailActivity;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 
 
@@ -53,6 +55,7 @@ public class foodListAdapter extends RecyclerView.Adapter<foodListAdapter.ViewHo
         FoodDomain product = items.get(position);
         holder.productName.setText(product.getNama());
         holder.productPrice.setText(String.format("Rp %s", product.getHarga()));
+        holder.productRating.setText(product.getRating());
         FirebaseStorage storage = FirebaseStorage.getInstance();
         StorageReference storageRef = storage.getReference();
         StorageReference ImageRef = storageRef.child("images/"+product.getFoto());
@@ -88,12 +91,15 @@ public class foodListAdapter extends RecyclerView.Adapter<foodListAdapter.ViewHo
         ImageView productImage;
         TextView productName;
         TextView productPrice;
+        TextView productRating;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             productImage = itemView.findViewById(R.id.picFood);
             productName = itemView.findViewById(R.id.textTitleFood);
             productPrice = itemView.findViewById(R.id.textPrice);
+            productRating = itemView.findViewById(R.id.textScore);
+
         }
     }
 }

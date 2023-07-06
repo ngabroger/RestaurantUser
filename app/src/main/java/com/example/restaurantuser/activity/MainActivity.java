@@ -18,10 +18,12 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.restaurantuser.Domain.OrderData;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
@@ -186,6 +188,8 @@ public class MainActivity extends AppCompatActivity {
                 });
             }
         });
+
+
         settingBtn.setOnClickListener(view -> startActivity(new Intent(MainActivity.this, SettingActivity.class)));
         usernameTxt =findViewById(R.id.displayUsernameTxt);
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
@@ -232,7 +236,8 @@ public class MainActivity extends AppCompatActivity {
                     FoodDomain foodDomain = dataSnapshot.getValue(FoodDomain.class);
                     items.add(foodDomain);
                 }
-                adapter.notifyDataSetChanged();
+                originalFoodList.addAll(items);
+                adapterFoodList.notifyDataSetChanged();
             }
 
             @Override
