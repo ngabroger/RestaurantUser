@@ -41,6 +41,9 @@ public class foodListAdapter extends RecyclerView.Adapter<foodListAdapter.ViewHo
         this.items = items;
         this.context = context;
     }
+    public void setItems(ArrayList<FoodDomain> items) {
+        this.items = items;
+    }
 
     @NonNull
     @Override

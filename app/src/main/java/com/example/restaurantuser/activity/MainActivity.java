@@ -92,7 +92,6 @@ public class MainActivity extends AppCompatActivity {
                 // No implementation needed here
             }
         });
-
         bottoNavigation();
 
         recyclerViewFood = findViewById(R.id.viewBest);
@@ -104,9 +103,12 @@ public class MainActivity extends AppCompatActivity {
         displayUser();
 
         readData();
+
         
         orderZone();
     }
+
+
 
     private void orderZone() {
     }
@@ -227,10 +229,15 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         }
+
+        // Update the adapter with the filtered data
+        adapter.setItems(filteredItems);
         adapter.notifyDataSetChanged();
     }
 
-
+    public void setItems(ArrayList<FoodDomain> items) {
+        this.items = items;
+    }
 
     private void readData() {
         databaseReference.addValueEventListener(new ValueEventListener() {
