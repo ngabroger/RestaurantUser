@@ -52,9 +52,9 @@ public class MainActivity extends AppCompatActivity {
             private ImageView  imageProfile;
             private TextView usernameTxt,alamatHomeTxt;
             private ArrayList<FoodDomain> items;
+            private LinearLayout orderBtn;
             private ConstraintLayout clfood, cldrink, clmore;
             private foodListAdapter adapter;
-            private ConstraintLayout orderBtn;
     private List<FoodDomain> originalFoodList = new ArrayList<>();
 
 
@@ -66,8 +66,7 @@ public class MainActivity extends AppCompatActivity {
 
         // Initialize the database reference
         databaseReference = FirebaseDatabase.getInstance().getReference().child("products");
-
-        orderBtn = findViewById(R.id.orderBtn);
+        orderBtn = findViewById(R.id.orderLinear);
         // Initialize the originalFoodList with your data
         originalFoodList = initializeFoodList(); // Initialize with your data
         recyclerViewFood = findViewById(R.id.viewBest);
@@ -75,7 +74,6 @@ public class MainActivity extends AppCompatActivity {
         adapterFoodList = new foodListAdapter((Context) MainActivity.this, (ArrayList<FoodDomain>) originalFoodList);
         recyclerViewFood.setAdapter(adapterFoodList);
         EditText searchEditText = findViewById(R.id.editTextText4);
-        showorderBtn();
 // Add a TextWatcher to the search EditText
         searchEditText.addTextChangedListener(new TextWatcher() {
             @Override
@@ -106,10 +104,11 @@ public class MainActivity extends AppCompatActivity {
         displayUser();
 
         readData();
+        
+        orderZone();
     }
 
-    private void showorderBtn() {
-        DatabaseReference orderRef = FirebaseDatabase.getInstance().getReference().child("users").child(firebaseUser.getUid());
+    private void orderZone() {
     }
 
     @SuppressLint("SetTextI18n")
