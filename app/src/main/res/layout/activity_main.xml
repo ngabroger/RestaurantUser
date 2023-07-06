@@ -50,6 +50,36 @@
                     app:layout_constraintStart_toEndOf="@+id/imageView"
                     app:layout_constraintTop_toTopOf="parent" />
 
+                <LinearLayout
+                    android:id="@+id/orderBtn"
+                    android:layout_width="100dp"
+                    android:layout_height="50dp"
+                    android:layout_marginEnd="24dp"
+                    android:background="@drawable/white_background"
+                    android:orientation="vertical"
+                    android:padding="5dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <ImageView
+                        android:id="@+id/imageView5"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:backgroundTint="#E91E63"
+                        app:tint="#E91E63"
+                        app:srcCompat="@drawable/baseline_local_shipping_24" />
+
+                    <TextView
+                        android:id="@+id/textView3"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/poppins_medium"
+                        android:gravity="center"
+                        android:text="Your Order"
+                        android:textColor="@color/black" />
+                </LinearLayout>
+
                 <TextView
                     android:id="@+id/displayUsernameTxt"
                     android:layout_width="wrap_content"
@@ -66,7 +96,7 @@
 
                 <TextView
                     android:id="@+id/alamatHomeTxt"
-                    android:layout_width="250dp"
+                    android:layout_width="140dp"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/poppins"
                     android:text="Bogor - Cibinong - no 05"
@@ -98,7 +128,7 @@
                     android:drawableStart="@drawable/search"
                     android:drawablePadding="8dp"
                     android:ems="10"
-                    android:textColorHint="#c0c2c4"
+                    android:textColorHint="@color/cardview_dark_background"
                     android:textColor="@color/black"
                     android:fontFamily="@font/poppins_regular"
                     android:hint="search food / drink"
