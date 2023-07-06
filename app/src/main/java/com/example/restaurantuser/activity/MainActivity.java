@@ -52,7 +52,6 @@ public class MainActivity extends AppCompatActivity {
             private ImageView  imageProfile;
             private TextView usernameTxt,alamatHomeTxt;
             private ArrayList<FoodDomain> items;
-            private LinearLayout orderBtn;
             private ConstraintLayout clfood, cldrink, clmore;
             private foodListAdapter adapter;
     private List<FoodDomain> originalFoodList = new ArrayList<>();
@@ -66,7 +65,6 @@ public class MainActivity extends AppCompatActivity {
 
         // Initialize the database reference
         databaseReference = FirebaseDatabase.getInstance().getReference().child("products");
-        orderBtn = findViewById(R.id.orderLinear);
         // Initialize the originalFoodList with your data
         originalFoodList = initializeFoodList(); // Initialize with your data
         recyclerViewFood = findViewById(R.id.viewBest);
@@ -104,13 +102,7 @@ public class MainActivity extends AppCompatActivity {
 
         readData();
 
-        
-        orderZone();
-    }
 
-
-
-    private void orderZone() {
     }
 
     @SuppressLint("SetTextI18n")
