@@ -15,6 +15,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.example.restaurantuser.Domain.FoodDomain;
 import com.example.restaurantuser.Domain.UserDomain;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -87,6 +88,7 @@ public class registerActivity extends AppCompatActivity {
 
                             if (firebaseUser != null) {
                                 StorageReference imageRef = storageRef.child("profile_images/"+firebaseUser.getUid()+ ".jpg");
+                                FoodDomain food = new FoodDomain();
                                 DatabaseReference userRef = firebaseDatabase.getReference().child("users").child(firebaseUser.getUid());
                                 UserDomain user = new UserDomain();
                                 user.setUserId(firebaseUser.getUid());

@@ -93,7 +93,16 @@
             android:textColor="#8e8e8e"
             android:textSize="18sp"
             android:inputType="textPassword" />
+        <TextView
+            android:id="@+id/textView37"
+            style="@style/textStyleBold"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Forgot Password"
 
+            android:layout_marginTop="15dp"
+            android:textAlignment="viewEnd"
+            android:textSize="14sp" />
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/loginBtn"
             android:layout_width="match_parent"
@@ -104,7 +113,7 @@
             android:fontFamily="@font/poppins"
             android:textSize="20sp"
             android:textColor="@color/white"
-            android:layout_marginTop="48dp"/>
+            android:layout_marginTop="25dp"/>
 
     </LinearLayout>
 

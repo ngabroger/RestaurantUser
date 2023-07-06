@@ -3,11 +3,21 @@ package com.example.restaurantuser.activity;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
+import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
+import android.text.SpannableString;
+import android.text.Spanned;
+import android.text.method.LinkMovementMethod;
+import android.text.style.ClickableSpan;
+import android.text.style.URLSpan;
+import android.text.util.Linkify;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
@@ -23,6 +33,7 @@ public class changePassActivity extends AppCompatActivity {
     private EditText oldPasswordTxt,newPasswordTxt,RePasswordTxt;
     private ImageView backBtnPassword;
     private LinearLayout saveBtn;
+    private TextView textView37;
     private FirebaseAuth mAuth;
 
     private ProgressDialog progressDialog;
@@ -33,8 +44,31 @@ public class changePassActivity extends AppCompatActivity {
         initView();
         buttonInteraction();
         FirebaseUser currentUser = mAuth.getCurrentUser();
-
+        forgotPassword();
     }
+
+    private void forgotPassword() {
+        TextView textView37 = findViewById(R.id.textView38);
+        String forgotPasswordText = "Forgot Password?";
+        SpannableString spannableString = new SpannableString(forgotPasswordText);
+        Linkify.addLinks(spannableString, Linkify.WEB_URLS);
+
+        textView37.setText(spannableString);
+        textView37.setMovementMethod(LinkMovementMethod.getInstance());
+
+        URLSpan urlSpan = new URLSpan("https://diningrestaurant.appspot.com/forgotpassword.jsp") {
+            @Override
+            public void onClick(View widget) {
+                String url = getURL();
+                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+                startActivity(intent);
+            }
+        };
+
+        spannableString.setSpan(urlSpan, 0, forgotPasswordText.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        textView37.setText(spannableString);
+    }
+
 
     private void buttonInteraction() {
         backBtnPassword.setOnClickListener(new View.OnClickListener() {

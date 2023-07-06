@@ -5,12 +5,19 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.text.SpannableString;
+import android.text.Spanned;
+import android.text.method.LinkMovementMethod;
+import android.text.style.ClickableSpan;
+import android.text.util.Linkify;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.restaurantuser.Domain.UserDomain;
@@ -33,6 +40,7 @@ public class loginActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private ProgressDialog progressDialog;
     private FirebaseDatabase firebaseDatabase;
+    private TextView textView37;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +48,29 @@ public class loginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
         initView();
         btnInteraction();
+        forgotPassword();
+
+    }
+
+    private void forgotPassword() {
+        TextView textView37 = findViewById(R.id.textView37);
+        String forgotPasswordText = "Forgot Password? Reset your password here";
+        SpannableString spannableString = new SpannableString(forgotPasswordText);
+        Linkify.addLinks(spannableString, Linkify.WEB_URLS);
+
+        textView37.setText(spannableString);
+        textView37.setMovementMethod(LinkMovementMethod.getInstance());
+        ClickableSpan clickableSpan = new ClickableSpan() {
+            @Override
+            public void onClick(View widget) {
+                String url = "https://diningrestaurant.appspot.com/forgotpassword.jsp";
+                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+                startActivity(intent);
+            }
+        };
+
+        spannableString.setSpan(clickableSpan, 0, forgotPasswordText.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        textView37.setText(spannableString);
     }
 
     private void btnInteraction() {
