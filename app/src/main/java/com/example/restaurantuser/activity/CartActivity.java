@@ -198,6 +198,8 @@ public class CartActivity extends AppCompatActivity {
         // Mendapatkan alamat dari pengguna saat ini
         String address = alamatCartTxt.getText().toString();
 
+
+
         // Mendapatkan pesanan dari keranjang
         ArrayList<FoodDomain> cartItems = managementCart.getListCart();
 
@@ -215,7 +217,7 @@ public class CartActivity extends AppCompatActivity {
         String orderDateTime = dateFormat.format(new Date());
 
 // Membuat objek untuk menyimpan data pesanan
-        OrderData orderData = new OrderData(username, address, cartItems);
+        OrderData orderData = new OrderData(username, address, "sedang dibuat", cartItems);
         orderData.setTotalPemesanan(totalPemesanan);
         orderData.setOrderDateTime(orderDateTime);
 

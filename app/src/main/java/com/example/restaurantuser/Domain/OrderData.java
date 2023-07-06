@@ -8,6 +8,7 @@ import java.util.Date;
 public class OrderData {
     private String username;
     private String address;
+    private String status;
     private ArrayList<FoodDomain> items;
     private double totalPemesanan;
     private String orderDateTime;
@@ -17,15 +18,26 @@ public class OrderData {
         // Empty constructor needed for Firebase
     }
 
-    public OrderData(String username, String address, ArrayList<FoodDomain> items) {
+
+
+    public OrderData(String username, String address,String status, ArrayList<FoodDomain> items) {
         this.username = username;
         this.address = address;
         this.items = items;
+        this.status = status;
         this.totalPemesanan = 0;
 
         // Set orderDateTime in desired format: yyyy-MM-dd'T'HH:mm:ss.SSS'Z'
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
         this.orderDateTime = dateFormat.format(new Date());
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     public String getUsername() {
