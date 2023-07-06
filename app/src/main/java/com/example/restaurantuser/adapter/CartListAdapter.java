@@ -17,6 +17,8 @@ import com.example.restaurantuser.Domain.FoodDomain;
 import com.example.restaurantuser.Helper.ChangeNumberItemsListener;
 import com.example.restaurantuser.Helper.ManagementCart;
 import com.example.restaurantuser.R;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
 
@@ -54,12 +56,17 @@ public class CartListAdapter extends RecyclerView.Adapter<CartListAdapter.ViewHo
 
         holder.num.setText(String.valueOf(listFoodSelected.get(position).getNumericCart()));
 
-        int drawableResourceId = holder.itemView.getContext().getResources().getIdentifier(listFoodSelected.get(position).getFoto(), "drawable", holder.itemView.getContext().getPackageName());
+        String imageName = listFoodSelected.get(position).getFoto();
 
-        Glide.with(holder.itemView.getContext())
-                .load(drawableResourceId)
-                .transform(new GranularRoundedCorners(30, 30, 30, 30))
-                .into(holder.pic);
+        FirebaseStorage storage = FirebaseStorage.getInstance();
+        StorageReference storageRef = storage.getReference();
+        StorageReference ImageRef = storageRef.child("images/" + imageName);
+        ImageRef.getDownloadUrl().addOnSuccessListener(url -> {
+            Glide.with(holder.itemView.getContext())
+                    .load(url)
+                    .transform(new GranularRoundedCorners(30, 30, 30, 30))
+                    .into(holder.pic);
+        });
 
     holder.plusItem.setOnClickListener(view -> managementCart.plusNumberFood(listFoodSelected, position, () -> {
         notifyDataSetChanged();

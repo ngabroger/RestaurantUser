@@ -4,22 +4,34 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.GranularRoundedCorners;
+import com.example.restaurantuser.Domain.FoodDomain;
+import com.example.restaurantuser.Domain.OrderData;
 import com.example.restaurantuser.Domain.UserDomain;
 import com.example.restaurantuser.Helper.ChangeNumberItemsListener;
 import com.example.restaurantuser.Helper.ManagementCart;
+import com.example.restaurantuser.Helper.TinyDB;
 import com.example.restaurantuser.R;
 import com.example.restaurantuser.adapter.CartListAdapter;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.Timestamp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -38,22 +50,32 @@ public class CartActivity extends AppCompatActivity {
     private ManagementCart managementCart;
     private TextView totalFeeTxt,taxTxt,deliveryTxt,totalTxt,emptyTxt,alamatCartTxt;
     private double tax;
+    private Button orderBtn;
     private ScrollView scrollView;
-    private ImageView backBtn, picView,alamatIntentBtn;
+    private ImageView backBtn,alamatIntentBtn;
     private FirebaseDatabase firebaseDatabase;
     private FirebaseAuth firebaseAuth;
+    private DatabaseReference databaseReference;
     private FirebaseUser firebaseUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cart);
-        managementCart = new ManagementCart(this);
-        initView();
-        initList();
-        calculateCart();
-        setVariable();
-        setDisplayAlamat();
+
+        firebaseAuth = FirebaseAuth.getInstance();
+        firebaseUser = firebaseAuth.getCurrentUser();
+
+        if (firebaseUser == null) {
+            finish();
+        } else {
+            managementCart = new ManagementCart(this);
+            initView();
+            initList();
+            calculateCart();
+            setVariable();
+            setDisplayAlamat();
+        }
     }
 
     private void setDisplayAlamat() {
@@ -89,6 +111,13 @@ public class CartActivity extends AppCompatActivity {
                 startActivity(new Intent(getApplicationContext(), AlamatActivity.class));
             }
         });
+
+        orderBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                sendOrderToFirebase();
+            }
+        });
     }
 
     private void initList() {
@@ -104,16 +133,7 @@ public class CartActivity extends AppCompatActivity {
         });
         recyclerViewList.setAdapter(adapter);
 
-        FirebaseStorage storage = FirebaseStorage.getInstance();
-        StorageReference storageRef = storage.getReference();
-        StorageReference ImageRef = storageRef.child("images/"+managementCart);
-        ImageRef.getDownloadUrl().addOnSuccessListener(url -> {
-            Glide.with(this)
-                    .load(url)
-                    .transform(new GranularRoundedCorners(40, 40, 0, 0))
-                    .into(picView);
-        }).addOnFailureListener(exception -> {
-        });
+
 
         if(managementCart.getListCart().isEmpty()){
             emptyTxt.setVisibility(View.VISIBLE);
@@ -160,8 +180,73 @@ public class CartActivity extends AppCompatActivity {
         scrollView=findViewById(R.id.scrollView3);
         backBtn=findViewById(R.id.backBtn);
         emptyTxt=findViewById(R.id.emptyTxt);
-        picView=findViewById(R.id.pic);
         alamatIntentBtn = findViewById(R.id.alamatIntentBtn);
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+        orderBtn = findViewById(R.id.orderBtn);
     }
+
+    private void sendOrderToFirebase() {
+        // Mendapatkan referensi ke Firebase Realtime Database
+        DatabaseReference databaseRef = FirebaseDatabase.getInstance().getReference();
+
+        // Mendapatkan ID pengguna saat ini
+        String userId = firebaseAuth.getCurrentUser().getUid();
+
+        // Mendapatkan username dari pengguna saat ini
+        String username = firebaseUser.getDisplayName();
+
+        // Mendapatkan alamat dari pengguna saat ini
+        String address = alamatCartTxt.getText().toString();
+
+        // Mendapatkan pesanan dari keranjang
+        ArrayList<FoodDomain> cartItems = managementCart.getListCart();
+
+        // Menghitung total harga untuk setiap item di keranjang dan total pemesanan
+        double totalPemesanan = 0.0;
+        for (FoodDomain item : cartItems) {
+            int harga = Integer.parseInt(item.getHarga()); // Convert the harga from String to int
+            double totalHarga = harga * item.getNumericCart();
+            item.setTotalHarga(totalHarga);
+            totalPemesanan += totalHarga;
+        }
+
+        // Mendapatkan tanggal dan waktu saat ini
+        Calendar calendar = Calendar.getInstance();
+        int hour = calendar.get(Calendar.HOUR_OF_DAY); // Jam (0-23)
+        int day = calendar.get(Calendar.DAY_OF_MONTH); // Tanggal (1-31)
+        int month = calendar.get(Calendar.MONTH) + 1; // Bulan (0-11) -> Adjustment +1 for 1-12 range
+        int year = calendar.get(Calendar.YEAR); // Tahun
+
+        // Membuat objek untuk menyimpan data pesanan
+        OrderData orderData = new OrderData(username, address, cartItems);
+        orderData.setTotalPemesanan(totalPemesanan);
+        orderData.setOrderTime(hour);
+        orderData.setOrderDay(day);
+        orderData.setOrderMonth(month);
+        orderData.setOrderYear(year);
+
+        // Menambahkan pesanan ke Firebase Realtime Database
+        databaseRef.child("onlineorder").child(userId).setValue(orderData)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        // Pesanan berhasil ditambahkan ke Firebase Realtime Database
+                        Toast.makeText(CartActivity.this, "Pesanan berhasil dikirim", Toast.LENGTH_SHORT).show();
+
+                        // Menghapus semua item dari keranjang setelah pesanan terkirim
+                        managementCart.clearCart();
+
+                        // Kembali ke halaman sebelumnya atau halaman utama
+                        finish(); // Atau ganti dengan intent ke halaman lain
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        // Gagal mengirim pesanan ke Firebase Realtime Database
+                        Toast.makeText(CartActivity.this, "Gagal mengirim pesanan", Toast.LENGTH_SHORT).show();
+                    }
+                });
+    }
+
 }

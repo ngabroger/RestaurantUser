@@ -58,8 +58,8 @@ public class DetailActivity extends AppCompatActivity {
         DescriptionTxt.setText(object.getDeskripsi());
         numberOrderTxt.setText(""+numberOrder);
         categoryTxt.setText(object.getKategori());
-        startTxt.setText(object.getScore()+"");
-        timeTxt.setText(object.getTimes()+" min");
+        startTxt.setText(object.getRating()+"");
+        timeTxt.setText(object.getWaktu()+" min");
         AddToCartBtn.setText("Add To Cart " + "Rp." + (int) Math.round(numberOrder * Double.parseDouble(object.getHarga())));
 
         plustBtn.setOnClickListener(v -> {

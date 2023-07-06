@@ -15,6 +15,7 @@ public class ManagementCart {
         this.context = context;
         this.tinyDB = new TinyDB(context);
     }
+
     public void insertFood(FoodDomain item){
         ArrayList<FoodDomain> listfood = getListCart();
         boolean existAlready  = false;
@@ -36,7 +37,7 @@ public class ManagementCart {
     }
 
 
-    public ArrayList<FoodDomain>  getListCart(){
+    public ArrayList<FoodDomain> getListCart(){
         return tinyDB.getListObject("CartList");
     }
     public void minusNumberFood(ArrayList <FoodDomain> listfood,int position, ChangeNumberItemsListener changeNumberItemsListener){
@@ -62,6 +63,12 @@ public class ManagementCart {
         }
         return fee;
     }
+
+    public void clearCart() {
+        tinyDB.remove("CartList");
+    }
+
+
 }
 
 

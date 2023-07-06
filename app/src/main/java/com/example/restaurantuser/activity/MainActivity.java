@@ -1,15 +1,18 @@
 package com.example.restaurantuser.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -32,6 +35,12 @@ import com.google.firebase.auth.FirebaseUser;
 import org.checkerframework.checker.nullness.qual.NonNull;
 
 import java.util.ArrayList;
+import java.util.List;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.widget.EditText;
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
     private RecyclerView.Adapter adapterFoodList;
@@ -41,7 +50,10 @@ public class MainActivity extends AppCompatActivity {
             private ImageView  imageProfile;
             private TextView usernameTxt,alamatHomeTxt;
             private ArrayList<FoodDomain> items;
+            private ConstraintLayout clfood, cldrink, clmore;
             private foodListAdapter adapter;
+    private List<FoodDomain> originalFoodList = new ArrayList<>();
+
 
 
     @Override
@@ -49,6 +61,36 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        // Initialize the database reference
+        databaseReference = FirebaseDatabase.getInstance().getReference().child("products");
+
+
+        // Initialize the originalFoodList with your data
+        originalFoodList = initializeFoodList(); // Initialize with your data
+        recyclerViewFood = findViewById(R.id.viewBest);
+        recyclerViewFood.setLayoutManager(new GridLayoutManager(this, 2));
+        adapterFoodList = new foodListAdapter((Context) MainActivity.this, (ArrayList<FoodDomain>) originalFoodList);
+        recyclerViewFood.setAdapter(adapterFoodList);
+        EditText searchEditText = findViewById(R.id.editTextText4);
+// Add a TextWatcher to the search EditText
+        searchEditText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                // No implementation needed here
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                // Call the filter method with the current text in the search EditText
+                filterFoodList(charSequence.toString().toLowerCase());
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                // No implementation needed here
+            }
+        });
+//govlok
         bottoNavigation();
 
         recyclerViewFood = findViewById(R.id.viewBest);
@@ -147,9 +189,37 @@ public class MainActivity extends AppCompatActivity {
         settingBtn.setOnClickListener(view -> startActivity(new Intent(MainActivity.this, SettingActivity.class)));
         usernameTxt =findViewById(R.id.displayUsernameTxt);
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
-        
+
+
+        // Add click listener to the "Food" category
+        ConstraintLayout clfood = findViewById(R.id.foodCategory);
+        clfood.setOnClickListener(view -> filterItems("Food"));
+
+        // Add click listener to the "Drink" category
+        ConstraintLayout cldrink = findViewById(R.id.drinkCategory);
+        cldrink.setOnClickListener(view -> filterItems("Drink"));
+
+        // Add click listener to the "More" category
+        ConstraintLayout clmore = findViewById(R.id.moreCategory);
+        clmore.setOnClickListener(view -> filterItems("More"));
     }
 
+    private void filterItems(String category) {
+        ArrayList<FoodDomain> filteredItems = new ArrayList<>();
+
+        if (category.equalsIgnoreCase("More")) {
+            // If the selected category is "More," show all items without filtering
+            filteredItems.addAll(items);
+        } else {
+            // Loop through all items and add the ones with the selected category to the filteredItems list
+            for (FoodDomain item : items) {
+                if (item.getKategori().equalsIgnoreCase(category)) {
+                    filteredItems.add(item);
+                }
+            }
+        }
+        adapter.notifyDataSetChanged();
+    }
 
 
 
@@ -171,4 +241,47 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
+    private void filterFoodList(String query) {
+        List<FoodDomain> filteredList = new ArrayList<>();
+
+        for (FoodDomain food : originalFoodList) {
+            if (food.getNama().toLowerCase().contains(query)) {
+                filteredList.add(food);
+            }
+        }
+
+        // Update the RecyclerView adapter with the filtered data
+        adapterFoodList = new foodListAdapter((Context) MainActivity.this, (ArrayList<FoodDomain>) filteredList);
+        recyclerViewFood.setAdapter(adapterFoodList);
+    }
+
+    private ArrayList<FoodDomain> initializeFoodList() {
+        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                originalFoodList.clear(); // Clear the list before adding new items
+
+                for (DataSnapshot foodSnapshot : dataSnapshot.getChildren()) {
+                    // Assuming you have a FoodDomain constructor that takes the necessary parameters
+                    FoodDomain food = foodSnapshot.getValue(FoodDomain.class);
+                    originalFoodList.add(food);
+                }
+
+                // Notify the adapter that the data has changed
+                adapterFoodList.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                // Handle the error if any
+                Toast.makeText(MainActivity.this, "Error retrieving data from Firebase", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        return (ArrayList<FoodDomain>) originalFoodList;
+    }
+
+
+
 }

@@ -9,9 +9,10 @@ public class FoodDomain implements Serializable {
     private String harga;
     private String kode;
     private String kategori;
-    private int times;
-    private double score;
+    private String waktu;
+    private String rating;
     private int numericCart;
+    private double TotalHarga;
 
     public FoodDomain() {
         // Diperlukan oleh Firebase untuk membuat objek dari data yang diambil dari database
@@ -75,20 +76,20 @@ public class FoodDomain implements Serializable {
         this.kategori = kategori;
     }
 
-    public int getTimes() {
-        return times;
+    public String getWaktu() {
+        return waktu;
     }
 
-    public void setTimes(int times) {
-        this.times = times;
+    public void setWaktu(String waktu) {
+        this.waktu = waktu;
     }
 
-    public double getScore() {
-        return score;
+    public String getRating() {
+        return rating;
     }
 
-    public void setScore(double score) {
-        this.score = score;
+    public void setRating(String rating) {
+        this.rating = rating;
     }
 
     public int getNumericCart() {
@@ -97,5 +98,13 @@ public class FoodDomain implements Serializable {
 
     public void setNumericCart(int numericCart) {
         this.numericCart = numericCart;
+    }
+
+    public double getTotalHarga() {
+        return TotalHarga;
+    }
+
+    public void setTotalHarga(double totalHarga) {
+        TotalHarga = totalHarga;
     }
 }
