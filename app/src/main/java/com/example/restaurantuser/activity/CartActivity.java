@@ -214,6 +214,10 @@ public class CartActivity extends AppCompatActivity {
             item.setTotalHarga(totalHarga);
             totalPemesanan += totalHarga;
         }
+        double delivery = 35000.0;
+        double percentTax = 0.11;
+        double tax = Math.round((totalPemesanan * percentTax * 100.0)) / 100;
+        double total = Math.round((totalPemesanan + tax + delivery) * 100) / 100;
 
         // Mengubah tanggal dan waktu menjadi format yang diinginkan
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss", new Locale("id", "ID"));
@@ -221,7 +225,7 @@ public class CartActivity extends AppCompatActivity {
 
 // Membuat objek untuk menyimpan data pesanan
         OrderData orderData = new OrderData(username, address, "sedang dibuat", cartItems);
-        orderData.setTotalPemesanan(totalPemesanan);
+        orderData.setTotalPemesanan(total);
         orderData.setOrderDateTime(orderDateTime);
 
 
