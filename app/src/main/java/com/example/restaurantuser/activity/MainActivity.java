@@ -63,7 +63,7 @@ public class MainActivity extends AppCompatActivity {
         adapterFoodList = new foodListAdapter((Context) MainActivity.this, items);
         recyclerViewFood.setAdapter(adapterFoodList);
         EditText searchEditText = findViewById(R.id.editTextText4);
-        // Add a TextWatcher to the search EditText
+        // Add a TextWatcher to the search EditTex
         searchEditText.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
