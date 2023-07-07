@@ -104,6 +104,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:ems="10"
+                android:textColorHint="#8e8e8e"
                 android:layout_marginTop="12dp"
                 android:inputType="textPassword"
                 android:textColor="#c4c4c6"
@@ -125,6 +126,7 @@
                 android:layout_marginTop="18dp"/>
 
             <EditText
+                android:textColorHint="#8e8e8e"
                 android:id="@+id/newPasswordTxt"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
@@ -149,6 +151,7 @@
                 android:layout_marginTop="18dp" />
 
             <EditText
+                android:textColorHint="#8e8e8e"
                 android:id="@+id/rePasswordTxt"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"

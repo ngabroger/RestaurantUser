@@ -117,7 +117,7 @@
             android:ems="10"
             android:hint="Your Password"
             android:padding="8dp"
-
+            android:textColorHint="#8e8e8e"
             android:textColor="#8e8e8e"
             android:textSize="18sp"/>
 
@@ -131,6 +131,7 @@
             android:layout_marginTop="20dp"/>
 
             <EditText
+                android:textColorHint="#8e8e8e"
                 android:id="@+id/passwordRetRegisterTxt"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
@@ -143,9 +144,6 @@
                 android:textColor="#8e8e8e"
                 android:textSize="18sp"
                 android:inputType="textPassword" />
-
-
-
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/registerBtn"
             style="@android:style/Widget.Button"

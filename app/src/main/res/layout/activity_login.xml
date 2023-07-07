@@ -88,6 +88,7 @@
             android:layout_marginTop="8dp"
             android:background="@drawable/edittext_background"
             android:ems="10"
+            android:textColorHint="#8e8e8e"
             android:hint="***********"
             android:padding="8dp"
             android:textColor="#8e8e8e"

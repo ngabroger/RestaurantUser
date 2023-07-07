@@ -46,7 +46,6 @@ public class MainActivity extends AppCompatActivity {
     private ImageView imageProfile;
     private TextView usernameTxt, alamatHomeTxt;
     private ArrayList<FoodDomain> items;
-    private LinearLayout orderBtn;
     private ConstraintLayout clfood, cldrink, clmore;
     private List<FoodDomain> originalFoodList = new ArrayList<>();
 
@@ -57,7 +56,6 @@ public class MainActivity extends AppCompatActivity {
 
         // Initialize the database reference
         databaseReference = FirebaseDatabase.getInstance().getReference().child("products");
-        orderBtn = findViewById(R.id.orderLinear);
         recyclerViewFood = findViewById(R.id.viewBest);
         recyclerViewFood.setLayoutManager(new GridLayoutManager(this, 2));
         adapterFoodList = new foodListAdapter((Context) MainActivity.this, items);
