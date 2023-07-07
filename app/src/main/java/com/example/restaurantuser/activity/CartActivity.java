@@ -18,6 +18,9 @@ import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
+import java.util.Locale;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.GranularRoundedCorners;
@@ -213,7 +216,7 @@ public class CartActivity extends AppCompatActivity {
         }
 
         // Mengubah tanggal dan waktu menjadi format yang diinginkan
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss", new Locale("id", "ID"));
         String orderDateTime = dateFormat.format(new Date());
 
 // Membuat objek untuk menyimpan data pesanan
